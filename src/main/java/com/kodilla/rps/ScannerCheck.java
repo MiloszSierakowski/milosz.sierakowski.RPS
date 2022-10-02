@@ -6,10 +6,10 @@ public class ScannerCheck {
     private Scanner scanner = new Scanner(System.in);
     private String savedStringFromKeyboardUsedLikeNumberOfWins = "";
     private String savedStringFromKeyboardLikeUserName = "";
-    private int realValue = 0;
+    private int finalNumberWinRoundsToWinGame = 0;
 
-    public int getRealValue() {
-        return realValue;
+    public int getFinalNumberWinRoundsToWinGame() {
+        return finalNumberWinRoundsToWinGame;
     }
 
     public String getsavedStringFromKeyboardLikeUserName() {
@@ -20,8 +20,8 @@ public class ScannerCheck {
         return savedStringFromKeyboardUsedLikeNumberOfWins;
     }
 
-    public void setRealValue(int realValue) {
-        this.realValue = realValue;
+    public void setFinalNumberWinRoundsToWinGame(int finalNumberWinRoundsToWinGame) {
+        this.finalNumberWinRoundsToWinGame = finalNumberWinRoundsToWinGame;
     }
 
     public void setSavedStringFromKeyboardUsedLikeNumberOfWins() {
@@ -41,17 +41,17 @@ public class ScannerCheck {
         return getsavedStringFromKeyboardLikeUserName();
     }
 
-    public void checkIfNumberOfWinsIsInt() throws KeyboardInputUnexpectedValueException {
+    public void checkThatTheNumberOfWinsIsInt() throws KeyboardInputUnexpectedValueException {
         try {
             String testedString = getSavedStringFromKeyboardUsedLikeNumberOfWins();
-            setRealValue(Integer.parseInt(testedString));
+            setFinalNumberWinRoundsToWinGame(Integer.parseInt(testedString));
         } catch (NumberFormatException e) {
             throw new KeyboardInputUnexpectedValueException("Wpisana wartosc nie jest liczba ");
         }
     }
 
     public void checkIfNumberOfWinsIsBigerThat0() throws KeyboardInputUnexpectedValueException {
-        if (getRealValue() <= 0) {
+        if (getFinalNumberWinRoundsToWinGame() <= 0) {
             throw new KeyboardInputUnexpectedValueException("Wartosc zwyciestw jest zero albo mniejsza od zera a tak nie mozna ");
         }
     }
@@ -60,7 +60,7 @@ public class ScannerCheck {
         boolean allConditionsOK = true;
 
         try {
-            checkIfNumberOfWinsIsInt();
+            checkThatTheNumberOfWinsIsInt();
         } catch (KeyboardInputUnexpectedValueException e) {
             allConditionsOK = false;
             System.out.println("Podana wartosc to nie liczba prosze sprobowac jeszcze raz ");
