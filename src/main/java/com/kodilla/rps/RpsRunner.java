@@ -7,6 +7,15 @@ public class RpsRunner {
         GameGui gameGui = new GameGui(gameDataBase);
         GameLogic gameLogic = new GameLogic(gameDataBase);
 
+        gameGui.initialMessageAndSaveUserNameInDataBase();
+        gameGui.SecondInitialMessageWhereGreetingsUserAndSaveNumberOfNecessarySmallWinsToWinTheGame();
+        gameGui.StartTheGameBeforeLoop();
+
+        gameDataBase.setEndGame(true);
+
+        do {
+
+        } while (!gameDataBase.isEndGame());
 
     }
 }
