@@ -99,38 +99,43 @@ public class TestOfClassScannerCheck {
         }
 
         @Test
-        void testOfMethodIfTheValueOptionThatTheUserChoosesIsIntFrom1To3WhenInputIs1(){
+        void testOfMethodIfTheValueOptionThatTheUserChoosesIsIntFrom1To3WhenInputIs1() {
             scannerCheck.setOptionThatTheUserChooses("1");
             assertTrue(scannerCheck::ifTheValueOptionThatTheUserChoosesIsIntFrom1To3);
         }
+
         @Test
-        void testOfMethodIfTheValueOptionThatTheUserChoosesIsIntFrom1To3WhenInputIs4(){
+        void testOfMethodIfTheValueOptionThatTheUserChoosesIsIntFrom1To3WhenInputIs4() {
             scannerCheck.setOptionThatTheUserChooses("4");
             assertFalse(scannerCheck::ifTheValueOptionThatTheUserChoosesIsIntFrom1To3);
         }
 
         @Test
-        void testOfMethodIfTheValueOptionThatTheUserChoosesIsXOrNWhenInputIsX(){
+        void testOfMethodIfTheValueOptionThatTheUserChoosesIsXOrNWhenInputIsX() {
             scannerCheck.setOptionThatTheUserChooses("x");
             assertTrue(scannerCheck::ifTheValueOptionThatTheUserChoosesIsXOrN);
         }
+
         @Test
-        void testOfMethodIfTheValueOptionThatTheUserChoosesIsXOrNWhenInputIsWrong(){
+        void testOfMethodIfTheValueOptionThatTheUserChoosesIsXOrNWhenInputIsWrong() {
             scannerCheck.setOptionThatTheUserChooses("a");
             assertFalse(scannerCheck::ifTheValueOptionThatTheUserChoosesIsXOrN);
         }
+
         @Test
-        void testOfMethodallConditionsAndFinalResultOfTheValueOptionThatTheUserChoosesWhenInputIsWrongLengthOfStringBiggerThat2(){
+        void testOfMethodAllConditionsAndFinalResultOfTheValueOptionThatTheUserChoosesWhenInputIsWrongLengthOfStringBiggerThat2() {
             scannerCheck.setOptionThatTheUserChooses("a2");
             assertFalse(scannerCheck::allConditionsAndFinalResultOfTheValueOptionThatTheUserChooses);
         }
+
         @Test
-        void testOfMethodallConditionsAndFinalResultOfTheValueOptionThatTheUserChoosesWhenInputIsWrong(){
+        void testOfMethodAllConditionsAndFinalResultOfTheValueOptionThatTheUserChoosesWhenInputIsWrong() {
             scannerCheck.setOptionThatTheUserChooses("a");
             assertFalse(scannerCheck::allConditionsAndFinalResultOfTheValueOptionThatTheUserChooses);
         }
+
         @Test
-        void testOfMethodallConditionsAndFinalResultOfTheValueOptionThatTheUserChoosesWhenInputIsOk(){
+        void testOfMethodAllConditionsAndFinalResultOfTheValueOptionThatTheUserChoosesWhenInputIsOk() {
             scannerCheck.setOptionThatTheUserChooses("3");
             assertTrue(scannerCheck::allConditionsAndFinalResultOfTheValueOptionThatTheUserChooses);
         }

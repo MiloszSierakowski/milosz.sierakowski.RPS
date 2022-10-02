@@ -17,11 +17,6 @@ public class RpsRunner {
         do {
 
 
-
-
-
-
-
         } while (!gameDataBase.isEndGame());
 
     }
