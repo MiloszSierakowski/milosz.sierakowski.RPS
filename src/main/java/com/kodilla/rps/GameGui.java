@@ -30,5 +30,9 @@ public class GameGui {
                 " klawisz n - uruchomienie gry od nowa");
     }
 
+    public void getUserSelection(){
+        System.out.println("prosze wcisnac klawisz wyboru: ");
+
+    }
 
 }

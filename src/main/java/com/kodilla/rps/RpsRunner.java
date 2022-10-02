@@ -10,10 +10,17 @@ public class RpsRunner {
         gameGui.initialMessageAndSaveUserNameInDataBase();
         gameGui.SecondInitialMessageWhereGreetingsUserAndSaveNumberOfNecessarySmallWinsToWinTheGameInDataBase();
         gameGui.userOptionsExplanation();
+        gameGui.getUserSelection();
 
         gameDataBase.setEndGame(true);
 
         do {
+
+
+
+
+
+
 
         } while (!gameDataBase.isEndGame());
 

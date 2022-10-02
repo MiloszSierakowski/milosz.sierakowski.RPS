@@ -18,55 +18,55 @@ public class TestOfClassScannerCheck {
 
         @Test
         void TestMethodCheckThatTheNumberOfWinsIsIntWithBadValue() {
-            scannerCheck.setSavedStringFromKeyboardUsedLikeNumberOfWins("n3");
-            assertThrows(KeyboardInputUnexpectedValueException.class, scannerCheck::checkThatTheNumberOfWinsIsInt);
+            scannerCheck.setFinalNumberWinRoundsToWinGameBeforeChecks("n5");
+            assertFalse(scannerCheck::checkThatTheNumberOfWinsIsInt);
         }
 
         @Test
         void TestMethodCheckThatTheNumberOfWinsIsIntWithGoodValue() {
-            scannerCheck.setSavedStringFromKeyboardUsedLikeNumberOfWins("2");
-            assertDoesNotThrow(scannerCheck::checkThatTheNumberOfWinsIsInt);
+            scannerCheck.setFinalNumberWinRoundsToWinGameBeforeChecks("2");
+            assertTrue(scannerCheck::checkThatTheNumberOfWinsIsInt);
         }
 
         @Test
         void TestMethodCheckIfNumberOfWinsIsBigerThat0WithBadValueEqual0() {
             scannerCheck.setFinalNumberWinRoundsToWinGame(0);
-            assertThrows(KeyboardInputUnexpectedValueException.class, scannerCheck::checkIfNumberOfWinsIsBigerThat0);
+            assertFalse(scannerCheck::checkIfNumberOfWinsIsBigerThat0);
         }
 
         @Test
         void TestMethodCheckIfNumberOfWinsIsBigerThat0WithBadValueEqualMinus10() {
             scannerCheck.setFinalNumberWinRoundsToWinGame(-10);
-            assertThrows(KeyboardInputUnexpectedValueException.class, scannerCheck::checkIfNumberOfWinsIsBigerThat0);
+            assertFalse(scannerCheck::checkIfNumberOfWinsIsBigerThat0);
         }
 
         @Test
         void TestMethodCheckIfNumberOfWinsIsBigerThat0WithGoodValueEqual1() {
             scannerCheck.setFinalNumberWinRoundsToWinGame(1);
-            assertDoesNotThrow(scannerCheck::checkIfNumberOfWinsIsBigerThat0);
+            assertTrue(scannerCheck::checkIfNumberOfWinsIsBigerThat0);
         }
 
         @Test
         void TestMethodCheckIfNumberOfWinsIsBigerThat0WithGoodValueEqual100() {
             scannerCheck.setFinalNumberWinRoundsToWinGame(100);
-            assertDoesNotThrow(scannerCheck::checkIfNumberOfWinsIsBigerThat0);
+            assertTrue(scannerCheck::checkIfNumberOfWinsIsBigerThat0);
         }
 
         @Test
         void TestMethodCheckAllConditionForNumberOfWinRoundsToWinTheGameWithGoodValue() {
-            scannerCheck.setSavedStringFromKeyboardUsedLikeNumberOfWins("1");
+            scannerCheck.setFinalNumberWinRoundsToWinGameBeforeChecks("1");
             assertTrue(scannerCheck.checkAllConditionForNumberOfWinRoundsToWinTheGame());
         }
 
         @Test
         void TestMethodCheckAllConditionForNumberOfWinRoundsToWinTheGameWithBadValueNotInt() {
-            scannerCheck.setSavedStringFromKeyboardUsedLikeNumberOfWins("hfsaidf");
+            scannerCheck.setFinalNumberWinRoundsToWinGameBeforeChecks("hfsaidf");
             assertFalse(scannerCheck.checkAllConditionForNumberOfWinRoundsToWinTheGame());
         }
 
         @Test
         void TestMethodCheckAllConditionForNumberOfWinRoundsToWinTheGameWithBadValueOutOfRange() {
-            scannerCheck.setSavedStringFromKeyboardUsedLikeNumberOfWins("0");
+            scannerCheck.setFinalNumberWinRoundsToWinGameBeforeChecks("0");
             assertFalse(scannerCheck.checkAllConditionForNumberOfWinRoundsToWinTheGame());
         }
     }
