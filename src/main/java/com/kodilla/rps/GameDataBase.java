@@ -7,7 +7,8 @@ public class GameDataBase {
     private User user;
     private int numberOfSmalWinsToWinTheGame;
     private int currentRound = 0;
-    private boolean endGame =false;
+    private boolean endGame = false;
+    private String optionThatUserChoose;
     private List<GameFigures> recordOfAllUserRounds = new ArrayList<>();
     private List<GameFigures> recordOfAllComputerRounds = new ArrayList<>();
 
@@ -31,6 +32,14 @@ public class GameDataBase {
         return currentRound;
     }
 
+    public String getOptionThatUserChoose() {
+        return optionThatUserChoose;
+    }
+
+    public void setOptionThatUserChoose(String optionThatUserChoose) {
+        this.optionThatUserChoose = optionThatUserChoose;
+    }
+
     public boolean isEndGame() {
         return endGame;
     }
@@ -51,10 +60,11 @@ public class GameDataBase {
         this.numberOfSmalWinsToWinTheGame = numberOfSmalWinsToWinTheGame;
     }
 
-   public void addUserMoveInThisRound(GameFigures e){
+    public void addUserMoveInThisRound(GameFigures e) {
         recordOfAllUserRounds.add(e);
-   }
-    public void addComputerMoveInThisRound(GameFigures e){
+    }
+
+    public void addComputerMoveInThisRound(GameFigures e) {
         recordOfAllComputerRounds.add(e);
     }
 

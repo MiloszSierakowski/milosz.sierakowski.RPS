@@ -7,8 +7,8 @@ public class ScannerCheck {
     private String finalNumberWinRoundsToWinGameBeforeChecks = "";
     private String savedStringFromKeyboardLikeUserName = "";
     private int finalNumberWinRoundsToWinGame = 0;
+    private String optionThatTheUserChooses = "";
 
-    private String optionThatTheUserChoosesBeforeChecks = "";
 
     public int getFinalNumberWinRoundsToWinGame() {
         return finalNumberWinRoundsToWinGame;
@@ -22,8 +22,8 @@ public class ScannerCheck {
         return finalNumberWinRoundsToWinGameBeforeChecks;
     }
 
-    public String getOptionThatTheUserChoosesBeforeChecks() {
-        return optionThatTheUserChoosesBeforeChecks;
+    public String getOptionThatTheUserChooses() {
+        return optionThatTheUserChooses;
     }
 
     public void setFinalNumberWinRoundsToWinGame(int finalNumberWinRoundsToWinGame) {
@@ -53,7 +53,7 @@ public class ScannerCheck {
     }
 
     public void changefinalNumberWinRoundsToWinGameBeforeChecksTofinalNumberWinRoundsToWinGame() {
-            setFinalNumberWinRoundsToWinGame(Integer.parseInt(getFinalNumberWinRoundsToWinGameBeforeChecks()));
+        setFinalNumberWinRoundsToWinGame(Integer.parseInt(getFinalNumberWinRoundsToWinGameBeforeChecks()));
     }
 
     public boolean checkIfNumberOfWinsIsBigerThat0() {
@@ -79,7 +79,6 @@ public class ScannerCheck {
     }
 
     public int takeNumberOfWinsAndGiveItToGameGui() {
-        int numberOfWinsNesessaryToWin = 0;
         boolean goodValue;
 
         do {
@@ -87,21 +86,48 @@ public class ScannerCheck {
             goodValue = checkAllConditionForNumberOfWinRoundsToWinTheGame();
         } while (!goodValue);
 
-        return numberOfWinsNesessaryToWin;
+        return getFinalNumberWinRoundsToWinGame();
     }
 
-    private void setOptionThatTheUserChoosesBeforeChecks() {
-        this.optionThatTheUserChoosesBeforeChecks = scanner.nextLine();
+    private void setOptionThatTheUserChooses() {
+        this.optionThatTheUserChooses = scanner.nextLine();
     }
 
-    public void setOptionThatTheUserChoosesBeforeChecks(String optionThatTheUserChoosesBeforeChecks) {
-        this.optionThatTheUserChoosesBeforeChecks = optionThatTheUserChoosesBeforeChecks;
+    public void setOptionThatTheUserChooses(String optionThatTheUserChooses) {
+        this.optionThatTheUserChooses = optionThatTheUserChooses;
     }
 
-    public boolean IfTheValueOptionThatTheUserChoosesBeforeChecksIsInt()  {
+    public boolean checkedIfSizeOfOptionThatTheUserChoosesHasOnlyOneLetter() {
+        return getOptionThatTheUserChooses().length() == 1;
+    }
+
+    public boolean ifTheValueOptionThatTheUserChoosesIsIntFrom1To3() {
+        return getOptionThatTheUserChooses().matches("[1-3]");
+    }
+
+    public boolean ifTheValueOptionThatTheUserChoosesIsXOrN() {
+        return getOptionThatTheUserChooses().matches("[xnXN]");
+    }
+
+    public boolean allConditionsAndFinalResultOfTheValueOptionThatTheUserChooses() {
         boolean isOk = true;
-
-
+        if (checkedIfSizeOfOptionThatTheUserChoosesHasOnlyOneLetter()) {
+            if (!ifTheValueOptionThatTheUserChoosesIsIntFrom1To3() && !ifTheValueOptionThatTheUserChoosesIsXOrN()) {
+                System.out.println("Wprowadzona opcja jest nie prawidlowa prosze sprubowac ponownie ");
+                isOk = false;
+            }
+        } else {
+            System.out.println("Wprowadzona opcja jest nie praqwidlowa sklada sie z wiecej niz jednego zanku prosze to poprawic");
+            isOk = false;
+        }
         return isOk;
     }
+
+    public String takeOptionThatTheUserChoosesAndGiveItToGui() {
+        do {
+            setOptionThatTheUserChooses();
+        } while (!allConditionsAndFinalResultOfTheValueOptionThatTheUserChooses());
+        return getOptionThatTheUserChooses();
+    }
+
 }
