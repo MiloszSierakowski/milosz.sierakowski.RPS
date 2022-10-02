@@ -1,7 +1,7 @@
 package com.kodilla.rps;
 
-public class KeyboardInputOutsideTheExpectedValue extends Exception{
-    public KeyboardInputOutsideTheExpectedValue(String message) {
+public class KeyboardInputUnexpectedValueException extends Exception{
+    public KeyboardInputUnexpectedValueException(String message) {
         super(message);
     }
 }

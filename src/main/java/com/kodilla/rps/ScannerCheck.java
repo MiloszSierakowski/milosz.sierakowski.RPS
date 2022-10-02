@@ -41,18 +41,18 @@ public class ScannerCheck {
         return getsavedStringFromKeyboardLikeUserName();
     }
 
-    public void checkIfNumberOfWinsIsInt() throws KeyboardInputOutsideTheExpectedValue {
+    public void checkIfNumberOfWinsIsInt() throws KeyboardInputUnexpectedValueException {
         try {
             String testedString = getSavedStringFromKeyboardUsedLikeNumberOfWins();
             setRealValue(Integer.parseInt(testedString));
         } catch (NumberFormatException e) {
-            throw new KeyboardInputOutsideTheExpectedValue("Wpisana wartosc nie jest liczba ");
+            throw new KeyboardInputUnexpectedValueException("Wpisana wartosc nie jest liczba ");
         }
     }
 
-    public void checkIfNumberOfWinsIsBigerThat0() throws KeyboardInputOutsideTheExpectedValue {
+    public void checkIfNumberOfWinsIsBigerThat0() throws KeyboardInputUnexpectedValueException {
         if (getRealValue() <= 0) {
-            throw new KeyboardInputOutsideTheExpectedValue("Wartosc zwyciestw jest zero albo mniejsza od zera a tak nie mozna ");
+            throw new KeyboardInputUnexpectedValueException("Wartosc zwyciestw jest zero albo mniejsza od zera a tak nie mozna ");
         }
     }
 
@@ -61,7 +61,7 @@ public class ScannerCheck {
 
         try {
             checkIfNumberOfWinsIsInt();
-        } catch (KeyboardInputOutsideTheExpectedValue e) {
+        } catch (KeyboardInputUnexpectedValueException e) {
             allConditionsOK = false;
             System.out.println("Podana wartosc to nie liczba prosze sprobowac jeszcze raz ");
         }
@@ -69,7 +69,7 @@ public class ScannerCheck {
         if (allConditionsOK) {
             try {
                 checkIfNumberOfWinsIsBigerThat0();
-            } catch (KeyboardInputOutsideTheExpectedValue k) {
+            } catch (KeyboardInputUnexpectedValueException k) {
                 allConditionsOK = false;
                 System.out.println("Wpisana liczba zwyciestw musi byc wieksza niz 0 prosze sprubowac jeszcze raz ");
             }
