@@ -12,6 +12,8 @@ public class RpsRunner {
         gameGui.userOptionsExplanation();
         gameGui.getUserSelection();
 
+        gameGui.ifTheUserChooseNOrXAskHimToAcceptTheChoice();
+
         gameDataBase.setEndGame(true);
 
         do {

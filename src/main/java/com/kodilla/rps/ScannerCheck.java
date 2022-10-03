@@ -3,18 +3,19 @@ package com.kodilla.rps;
 import java.util.Scanner;
 
 public class ScannerCheck {
-    private Scanner scanner = new Scanner(System.in);
+    private final Scanner scanner = new Scanner(System.in);
     private String finalNumberWinRoundsToWinGameBeforeChecks = "";
     private String savedStringFromKeyboardLikeUserName = "";
     private int finalNumberWinRoundsToWinGame = 0;
     private String optionThatTheUserChooses = "";
+    private String yOrNThatTheUserChoosesForEndTheGameOrRestart = "";
 
 
     public int getFinalNumberWinRoundsToWinGame() {
         return finalNumberWinRoundsToWinGame;
     }
 
-    public String getsavedStringFromKeyboardLikeUserName() {
+    public String getSavedStringFromKeyboardLikeUserName() {
         return savedStringFromKeyboardLikeUserName;
     }
 
@@ -24,6 +25,10 @@ public class ScannerCheck {
 
     public String getOptionThatTheUserChooses() {
         return optionThatTheUserChooses;
+    }
+
+    public String getYOrNThatTheUserChoosesForEndTheGameOrRestart() {
+        return yOrNThatTheUserChoosesForEndTheGameOrRestart;
     }
 
     public void setFinalNumberWinRoundsToWinGame(int finalNumberWinRoundsToWinGame) {
@@ -38,13 +43,13 @@ public class ScannerCheck {
         this.finalNumberWinRoundsToWinGameBeforeChecks = string;
     }
 
-    private void setsavedStringFromKeyboardLikeUserName() {
+    private void setSavedStringFromKeyboardLikeUserName() {
         this.savedStringFromKeyboardLikeUserName = scanner.nextLine();
     }
 
     public String takeUserName() {
-        setsavedStringFromKeyboardLikeUserName();
-        return getsavedStringFromKeyboardLikeUserName();
+        setSavedStringFromKeyboardLikeUserName();
+        return getSavedStringFromKeyboardLikeUserName();
     }
 
     public boolean checkThatTheNumberOfWinsIsInt() {
@@ -52,30 +57,26 @@ public class ScannerCheck {
         return temporaryString.matches("[0-9]+");
     }
 
-    public void changefinalNumberWinRoundsToWinGameBeforeChecksTofinalNumberWinRoundsToWinGame() {
+    public void changeFinalNumberWinRoundsToWinGameBeforeChecksToFinalNumberWinRoundsToWinGame() {
         setFinalNumberWinRoundsToWinGame(Integer.parseInt(getFinalNumberWinRoundsToWinGameBeforeChecks()));
     }
 
-    public boolean checkIfNumberOfWinsIsBigerThat0() {
+    public boolean checkIfNumberOfWinsIsBiggerThat0() {
         return getFinalNumberWinRoundsToWinGame() > 0;
     }
 
     public boolean checkAllConditionForNumberOfWinRoundsToWinTheGame() {
-        boolean allConditionsOK = checkThatTheNumberOfWinsIsInt();
-
-        if (allConditionsOK) {
-            changefinalNumberWinRoundsToWinGameBeforeChecksTofinalNumberWinRoundsToWinGame();
-
-            if (!checkIfNumberOfWinsIsBigerThat0()) {
+        if (checkThatTheNumberOfWinsIsInt()) {
+            changeFinalNumberWinRoundsToWinGameBeforeChecksToFinalNumberWinRoundsToWinGame();
+            if (!checkIfNumberOfWinsIsBiggerThat0()) {
                 System.out.println("Podana liczba wygranych rund musi byc wieksza niz 0 prosze sprubuj ponownie ");
-                allConditionsOK = false;
+                return false;
             }
-
         } else {
             System.out.println("Wpisana wartość moze posiadac tylko liczby prosze sprubowac ponownie ");
+            return false;
         }
-
-        return allConditionsOK;
+        return true;
     }
 
     public int takeNumberOfWinsAndGiveItToGameGui() {
@@ -97,30 +98,37 @@ public class ScannerCheck {
         this.optionThatTheUserChooses = optionThatTheUserChooses;
     }
 
-    public boolean checkedIfSizeOfOptionThatTheUserChoosesHasOnlyOneLetter() {
+    private void setYOrNThatTheUserChoosesForEndTheGameOrRestart() {
+        this.yOrNThatTheUserChoosesForEndTheGameOrRestart = scanner.nextLine();
+    }
+
+    public void setYOrNThatTheUserChoosesForEndTheGameOrRestart(String tOrNThatTheUserChoosesForEndTheGameOrRestart) {
+        this.yOrNThatTheUserChoosesForEndTheGameOrRestart = tOrNThatTheUserChoosesForEndTheGameOrRestart;
+    }
+
+    public boolean checkIfSizeOfOptionThatTheUserChoosesHasOnlyOneLetter() {
         return getOptionThatTheUserChooses().length() == 1;
     }
 
-    public boolean ifTheValueOptionThatTheUserChoosesIsIntFrom1To3() {
+    public boolean ifTheUserChoosesIsIntFrom1To3() {
         return getOptionThatTheUserChooses().matches("[1-3]");
     }
 
-    public boolean ifTheValueOptionThatTheUserChoosesIsXOrN() {
+    public boolean ifTheUserChoosesIsXOrN() {
         return getOptionThatTheUserChooses().matches("[xnXN]");
     }
 
     public boolean allConditionsAndFinalResultOfTheValueOptionThatTheUserChooses() {
-        boolean isOk = true;
-        if (checkedIfSizeOfOptionThatTheUserChoosesHasOnlyOneLetter()) {
-            if (!ifTheValueOptionThatTheUserChoosesIsIntFrom1To3() && !ifTheValueOptionThatTheUserChoosesIsXOrN()) {
+        if (checkIfSizeOfOptionThatTheUserChoosesHasOnlyOneLetter()) {
+            if (!ifTheUserChoosesIsIntFrom1To3() && !ifTheUserChoosesIsXOrN()) {
                 System.out.println("Wprowadzona opcja jest nie prawidlowa prosze sprubowac ponownie ");
-                isOk = false;
+                return false;
             }
         } else {
-            System.out.println("Wprowadzona opcja jest nie praqwidlowa sklada sie z wiecej niz jednego zanku prosze to poprawic");
-            isOk = false;
+            System.out.println("Wprowadzona opcja jest nie prawidlowa sklada sie z wiecej niz jednego zanku prosze to poprawic");
+            return false;
         }
-        return isOk;
+        return true;
     }
 
     public String takeOptionThatTheUserChoosesAndGiveItToGui() {
@@ -128,6 +136,34 @@ public class ScannerCheck {
             setOptionThatTheUserChooses();
         } while (!allConditionsAndFinalResultOfTheValueOptionThatTheUserChooses());
         return getOptionThatTheUserChooses();
+    }
+
+    public boolean checkIfSizeTheUserChoosesIsYOrNHasOnlyOneLetter() {
+        return getYOrNThatTheUserChoosesForEndTheGameOrRestart().length() == 1;
+    }
+
+    public boolean ifTheUserChoosesIsYOrN() {
+        return getYOrNThatTheUserChoosesForEndTheGameOrRestart().matches("[ynYN]");
+    }
+
+    public boolean allConditionsAndFinalResultOfTheUserChoosesIsYOrN() {
+        if (checkIfSizeTheUserChoosesIsYOrNHasOnlyOneLetter()) {
+            if (!ifTheUserChoosesIsYOrN()) {
+                System.out.println("Wprowadzona odpowiedz to nie jest litera T lub N prosze o poprawienie ");
+                return false;
+            }
+        } else {
+            System.out.println("Zostalo wpisanych za duzo znakow prosze powturzyc ");
+            return false;
+        }
+        return true;
+    }
+
+    public String takeTheUserChoosesIsTOrNAndGiveItToGui() {
+        do {
+            setYOrNThatTheUserChoosesForEndTheGameOrRestart();
+        } while (!allConditionsAndFinalResultOfTheUserChoosesIsYOrN());
+        return getYOrNThatTheUserChoosesForEndTheGameOrRestart();
     }
 
 }

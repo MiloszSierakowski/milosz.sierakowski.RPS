@@ -6,15 +6,15 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 public class TestOfClassScannerCheck {
+    private ScannerCheck scannerCheck;
+
+    @BeforeEach
+    void setUp() {
+        scannerCheck = new ScannerCheck();
+    }
 
     @Nested
     class TestsOfMethodsVerifyingTheConditionsOfTheValueOfTheNumberOfWonRounds {
-        private ScannerCheck scannerCheck;
-
-        @BeforeEach
-        void setUp() {
-            scannerCheck = new ScannerCheck();
-        }
 
         @Test
         void TestMethodCheckThatTheNumberOfWinsIsIntWithBadValue() {
@@ -31,25 +31,25 @@ public class TestOfClassScannerCheck {
         @Test
         void TestMethodCheckIfNumberOfWinsIsBiggerThat0WithBadValueEqual0() {
             scannerCheck.setFinalNumberWinRoundsToWinGame(0);
-            assertFalse(scannerCheck::checkIfNumberOfWinsIsBigerThat0);
+            assertFalse(scannerCheck::checkIfNumberOfWinsIsBiggerThat0);
         }
 
         @Test
         void TestMethodCheckIfNumberOfWinsIsBiggerThat0WithBadValueEqualMinus10() {
             scannerCheck.setFinalNumberWinRoundsToWinGame(-10);
-            assertFalse(scannerCheck::checkIfNumberOfWinsIsBigerThat0);
+            assertFalse(scannerCheck::checkIfNumberOfWinsIsBiggerThat0);
         }
 
         @Test
         void TestMethodCheckIfNumberOfWinsIsBiggerThat0WithGoodValueEqual1() {
             scannerCheck.setFinalNumberWinRoundsToWinGame(1);
-            assertTrue(scannerCheck::checkIfNumberOfWinsIsBigerThat0);
+            assertTrue(scannerCheck::checkIfNumberOfWinsIsBiggerThat0);
         }
 
         @Test
         void TestMethodCheckIfNumberOfWinsIsBiggerThat0WithGoodValueEqual100() {
             scannerCheck.setFinalNumberWinRoundsToWinGame(100);
-            assertTrue(scannerCheck::checkIfNumberOfWinsIsBigerThat0);
+            assertTrue(scannerCheck::checkIfNumberOfWinsIsBiggerThat0);
         }
 
         @Test
@@ -73,53 +73,47 @@ public class TestOfClassScannerCheck {
 
     @Nested
     class TestsOfMethodsVerifyingTheConditionsOfTheOptionThatTheUserChooses {
-        private ScannerCheck scannerCheck;
-
-        @BeforeEach
-        void setUp() {
-            scannerCheck = new ScannerCheck();
-        }
 
         @Test
         void testOfMethodCheckedIfSizeOfOptionThatTheUserChoosesIsLessThat2WhenStringLengthIsBiggerThatOne() {
             scannerCheck.setOptionThatTheUserChooses("wd");
-            assertFalse(scannerCheck::checkedIfSizeOfOptionThatTheUserChoosesHasOnlyOneLetter);
+            assertFalse(scannerCheck::checkIfSizeOfOptionThatTheUserChoosesHasOnlyOneLetter);
         }
 
         @Test
         void testOfMethodCheckedIfSizeOfOptionThatTheUserChoosesIsLessThat2WhenStringHasOneLetter() {
             scannerCheck.setOptionThatTheUserChooses("m");
-            assertTrue(scannerCheck::checkedIfSizeOfOptionThatTheUserChoosesHasOnlyOneLetter);
+            assertTrue(scannerCheck::checkIfSizeOfOptionThatTheUserChoosesHasOnlyOneLetter);
         }
 
         @Test
         void testOfMethodCheckedIfSizeOfOptionThatTheUserChoosesIsLessThat2WhenStringHasZeroLetters() {
             scannerCheck.setOptionThatTheUserChooses("");
-            assertFalse(scannerCheck::checkedIfSizeOfOptionThatTheUserChoosesHasOnlyOneLetter);
+            assertFalse(scannerCheck::checkIfSizeOfOptionThatTheUserChoosesHasOnlyOneLetter);
         }
 
         @Test
         void testOfMethodIfTheValueOptionThatTheUserChoosesIsIntFrom1To3WhenInputIs1() {
             scannerCheck.setOptionThatTheUserChooses("1");
-            assertTrue(scannerCheck::ifTheValueOptionThatTheUserChoosesIsIntFrom1To3);
+            assertTrue(scannerCheck::ifTheUserChoosesIsIntFrom1To3);
         }
 
         @Test
         void testOfMethodIfTheValueOptionThatTheUserChoosesIsIntFrom1To3WhenInputIs4() {
             scannerCheck.setOptionThatTheUserChooses("4");
-            assertFalse(scannerCheck::ifTheValueOptionThatTheUserChoosesIsIntFrom1To3);
+            assertFalse(scannerCheck::ifTheUserChoosesIsIntFrom1To3);
         }
 
         @Test
         void testOfMethodIfTheValueOptionThatTheUserChoosesIsXOrNWhenInputIsX() {
             scannerCheck.setOptionThatTheUserChooses("x");
-            assertTrue(scannerCheck::ifTheValueOptionThatTheUserChoosesIsXOrN);
+            assertTrue(scannerCheck::ifTheUserChoosesIsXOrN);
         }
 
         @Test
         void testOfMethodIfTheValueOptionThatTheUserChoosesIsXOrNWhenInputIsWrong() {
             scannerCheck.setOptionThatTheUserChooses("a");
-            assertFalse(scannerCheck::ifTheValueOptionThatTheUserChoosesIsXOrN);
+            assertFalse(scannerCheck::ifTheUserChoosesIsXOrN);
         }
 
         @Test
@@ -140,6 +134,69 @@ public class TestOfClassScannerCheck {
             assertTrue(scannerCheck::allConditionsAndFinalResultOfTheValueOptionThatTheUserChooses);
         }
 
+    }
+
+    @Nested
+    class TestsOfMethodsVerifyingTheConditionsOfTheUserChoosesIsYOrN {
+        @Test
+        void testOfMethodCheckIfSizeCheckTheUserChoosesIsYOrNHasOnlyOneLetterWhenStringLengthIsBiggerThatOne() {
+            scannerCheck.setYOrNThatTheUserChoosesForEndTheGameOrRestart("wd");
+            assertFalse(scannerCheck::checkIfSizeTheUserChoosesIsYOrNHasOnlyOneLetter);
+        }
+
+        @Test
+        void testOfMethodCheckedIfSizeOfCheckTheUserChoosesIsYOrNHasOnlyOneLetterWhenStringHasOneLetter() {
+            scannerCheck.setYOrNThatTheUserChoosesForEndTheGameOrRestart("m");
+            assertTrue(scannerCheck::checkIfSizeTheUserChoosesIsYOrNHasOnlyOneLetter);
+        }
+
+        @Test
+        void testOfMethodCheckedIfSizeOfCheckTheUserChoosesIsYOrNHasOnlyOneLetterWhenStringHasZeroLetters() {
+            scannerCheck.setYOrNThatTheUserChoosesForEndTheGameOrRestart("");
+            assertFalse(scannerCheck::checkIfSizeTheUserChoosesIsYOrNHasOnlyOneLetter);
+        }
+
+        @Test
+        void testOfMethodIfTheUserChoosesIsYOrNWhenInputIsY() {
+            scannerCheck.setYOrNThatTheUserChoosesForEndTheGameOrRestart("y");
+            assertTrue(scannerCheck::ifTheUserChoosesIsYOrN);
+        }
+
+        @Test
+        void testOfMethodIfTheUserChoosesIsYOrNWhenInputIsN() {
+            scannerCheck.setYOrNThatTheUserChoosesForEndTheGameOrRestart("N");
+            assertTrue(scannerCheck::ifTheUserChoosesIsYOrN);
+        }
+
+        @Test
+        void testOfMethodIfTheUserChoosesIsYOrNWhenInputIsX() {
+            scannerCheck.setYOrNThatTheUserChoosesForEndTheGameOrRestart("X");
+            assertFalse(scannerCheck::ifTheUserChoosesIsYOrN);
+        }
+
+        @Test
+        void testOfMethodAllConditionsAndFinalResultOfTheUserChoosesIsYOrNWhenInputIsOkLikeN() {
+            scannerCheck.setYOrNThatTheUserChoosesForEndTheGameOrRestart("n");
+            assertTrue(scannerCheck::allConditionsAndFinalResultOfTheUserChoosesIsYOrN);
+        }
+
+        @Test
+        void testOfMethodAllConditionsAndFinalResultOfTheUserChoosesIsYOrNWhenInputIsOkLikeY() {
+            scannerCheck.setYOrNThatTheUserChoosesForEndTheGameOrRestart("Y");
+            assertTrue(scannerCheck::allConditionsAndFinalResultOfTheUserChoosesIsYOrN);
+        }
+
+        @Test
+        void testOfMethodAllConditionsAndFinalResultOfTheUserChoosesIsTYOrNWhenInputIsBadLikeXE() {
+            scannerCheck.setYOrNThatTheUserChoosesForEndTheGameOrRestart("xe");
+            assertFalse(scannerCheck::allConditionsAndFinalResultOfTheUserChoosesIsYOrN);
+        }
+
+        @Test
+        void testOfMethodAllConditionsAndFinalResultOfTheUserChoosesIsYOrNWhenInputIsBadLikeX() {
+            scannerCheck.setYOrNThatTheUserChoosesForEndTheGameOrRestart("X");
+            assertFalse(scannerCheck::allConditionsAndFinalResultOfTheUserChoosesIsYOrN);
+        }
     }
 
 }

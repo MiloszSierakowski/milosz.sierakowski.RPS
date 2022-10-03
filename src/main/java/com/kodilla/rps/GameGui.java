@@ -36,4 +36,27 @@ public class GameGui {
         gameDataBase.setOptionThatUserChoose(optionThatUserChoose);
     }
 
+    private void theUserChoosesToEndTheGameButIsUserSure(){
+        if (gameDataBase.getOptionThatUserChoose().contains("x")){
+            System.out.println("Wybrana opcja zakonczy gre czy jestes tego pewny " +
+                    "wcisnij i potwierdz enterem [T/N] ");
+            String temporaryString = scannerCheck.takeTheUserChoosesIsTOrNAndGiveItToGui();
+            gameDataBase.setTheUserChoosesIsTOrN(temporaryString);
+        }
+    }
+
+    private void theUserChoosesToResetTheGameButIsUserSure(){
+        if (gameDataBase.getOptionThatUserChoose().contains("n")){
+            System.out.println("Wybrana opcja zakonczy gre czy jestes tego pewny " +
+                    "wcisnij i potwierdz enterem [T/N] ");
+            String temporaryString = scannerCheck.takeTheUserChoosesIsTOrNAndGiveItToGui();
+            gameDataBase.setTheUserChoosesIsTOrN(temporaryString);
+        }
+    }
+
+    public void ifTheUserChooseNOrXAskHimToAcceptTheChoice(){
+        theUserChoosesToEndTheGameButIsUserSure();
+        theUserChoosesToResetTheGameButIsUserSure();
+    }
+
 }

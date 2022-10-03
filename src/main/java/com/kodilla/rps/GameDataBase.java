@@ -9,6 +9,8 @@ public class GameDataBase {
     private int currentRound = 0;
     private boolean endGame = false;
     private String optionThatUserChoose;
+
+    private String theUserChoosesIsTOrN;
     private List<GameFigures> recordOfAllUserRounds = new ArrayList<>();
     private List<GameFigures> recordOfAllComputerRounds = new ArrayList<>();
 
@@ -34,6 +36,14 @@ public class GameDataBase {
 
     public String getOptionThatUserChoose() {
         return optionThatUserChoose;
+    }
+
+    public String getTheUserChoosesIsTOrN() {
+        return theUserChoosesIsTOrN;
+    }
+
+    public void setTheUserChoosesIsTOrN(String theUserChoosesIsTOrN) {
+        this.theUserChoosesIsTOrN = theUserChoosesIsTOrN;
     }
 
     public void setOptionThatUserChoose(String optionThatUserChoose) {
