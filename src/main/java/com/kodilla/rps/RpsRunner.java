@@ -2,24 +2,29 @@ package com.kodilla.rps;
 
 public class RpsRunner {
     public static void main(String[] args) {
-
-        GameDataBase gameDataBase = new GameDataBase();
-        GameGui gameGui = new GameGui(gameDataBase);
-        GameLogic gameLogic = new GameLogic(gameDataBase);
-
-        gameGui.initialMessageAndSaveUserNameInDataBase();
-        gameGui.SecondInitialMessageWhereGreetingsUserAndSaveNumberOfNecessarySmallWinsToWinTheGameInDataBase();
-        gameGui.userOptionsExplanation();
-        gameGui.getUserSelection();
-
-        gameGui.ifTheUserChooseNOrXAskHimToAcceptTheChoice();
-
-        gameDataBase.setEndGame(true);
-
+        boolean endGame;
         do {
 
+            GameDataBase gameDataBase = new GameDataBase();
+            GameGui gameGui = new GameGui(gameDataBase);
+            GameLogic gameLogic = new GameLogic(gameDataBase, gameGui);
 
-        } while (!gameDataBase.isEndGame());
+            gameGui.initialMessageAndSaveUserNameInDataBase();
+            gameGui.SecondInitialMessageWhereGreetingsUserAndSaveNumberOfNecessarySmallWinsToWinTheGameInDataBase();
+            gameGui.userOptionsExplanation();
+
+            do {
+                gameGui.getUserSelection();
+                gameGui.ifTheUserChooseNOrXAskHimToAcceptTheChoice();
+                gameLogic.whatOptionUserChooseAndDecideWhatToDo();
+
+
+                endGame = gameDataBase.isEndGame();
+            } while (!gameDataBase.isResetGame());
+
+        } while (!endGame);
+
+        System.out.println("Dzieki za gre ");
 
     }
 }

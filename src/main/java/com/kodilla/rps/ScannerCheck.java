@@ -159,7 +159,7 @@ public class ScannerCheck {
         return true;
     }
 
-    public String takeTheUserChoosesIsTOrNAndGiveItToGui() {
+    public String takeTheUserChoosesIsYOrNAndGiveItToGui() {
         do {
             setYOrNThatTheUserChoosesForEndTheGameOrRestart();
         } while (!allConditionsAndFinalResultOfTheUserChoosesIsYOrN());

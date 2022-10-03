@@ -1,8 +1,8 @@
 package com.kodilla.rps;
 
 public class GameGui {
-    private GameDataBase gameDataBase;
-    private ScannerCheck scannerCheck = new ScannerCheck();
+    private final GameDataBase gameDataBase;
+    private final ScannerCheck scannerCheck = new ScannerCheck();
 
     public GameGui(GameDataBase gameDataBase) {
         this.gameDataBase = gameDataBase;
@@ -36,27 +36,42 @@ public class GameGui {
         gameDataBase.setOptionThatUserChoose(optionThatUserChoose);
     }
 
-    private void theUserChoosesToEndTheGameButIsUserSure(){
-        if (gameDataBase.getOptionThatUserChoose().contains("x")){
+    private void theUserChoosesToEndTheGameButIsUserSure() {
+        if (gameDataBase.getOptionThatUserChoose().contains("x")) {
             System.out.println("Wybrana opcja zakonczy gre czy jestes tego pewny " +
-                    "wcisnij i potwierdz enterem [T/N] ");
-            String temporaryString = scannerCheck.takeTheUserChoosesIsTOrNAndGiveItToGui();
-            gameDataBase.setTheUserChoosesIsTOrN(temporaryString);
+                    "wcisnij i potwierdz enterem [Y/N] ");
+            String temporaryString = scannerCheck.takeTheUserChoosesIsYOrNAndGiveItToGui();
+            gameDataBase.setTheUserChoosesIsYOrN(temporaryString);
         }
     }
 
-    private void theUserChoosesToResetTheGameButIsUserSure(){
-        if (gameDataBase.getOptionThatUserChoose().contains("n")){
+    private void theUserChoosesToResetTheGameButIsUserSure() {
+        if (gameDataBase.getOptionThatUserChoose().contains("n")) {
             System.out.println("Wybrana opcja zakonczy gre czy jestes tego pewny " +
-                    "wcisnij i potwierdz enterem [T/N] ");
-            String temporaryString = scannerCheck.takeTheUserChoosesIsTOrNAndGiveItToGui();
-            gameDataBase.setTheUserChoosesIsTOrN(temporaryString);
+                    "wcisnij i potwierdz enterem [Y/N] ");
+            String temporaryString = scannerCheck.takeTheUserChoosesIsYOrNAndGiveItToGui();
+            gameDataBase.setTheUserChoosesIsYOrN(temporaryString);
         }
     }
 
-    public void ifTheUserChooseNOrXAskHimToAcceptTheChoice(){
+    public void ifTheUserChooseNOrXAskHimToAcceptTheChoice() {
         theUserChoosesToEndTheGameButIsUserSure();
         theUserChoosesToResetTheGameButIsUserSure();
     }
 
+    public void whenUserChooseYesToEndGame(){
+        System.out.println("Gra zostanie zakonczona bez podania wyniku ");
+    }
+
+    public void whenUserChooseNoToEndGame(){
+        System.out.println("Gra jest kontynuowana ");
+    }
+
+    public void whenUserChooseYesToResetTheGame(){
+        System.out.println("Gra zostanie zresetowana ");
+    }
+
+    public void whenUserChooseNoToResetTheGame(){
+        System.out.println("Gra jest kontynuowana ");
+    }
 }

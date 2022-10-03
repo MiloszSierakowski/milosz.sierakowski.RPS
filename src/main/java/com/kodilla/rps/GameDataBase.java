@@ -8,9 +8,9 @@ public class GameDataBase {
     private int numberOfSmalWinsToWinTheGame;
     private int currentRound = 0;
     private boolean endGame = false;
+    private boolean resetGame = false;
     private String optionThatUserChoose;
-
-    private String theUserChoosesIsTOrN;
+    private String theUserChoosesIsYOrN;
     private List<GameFigures> recordOfAllUserRounds = new ArrayList<>();
     private List<GameFigures> recordOfAllComputerRounds = new ArrayList<>();
 
@@ -38,16 +38,24 @@ public class GameDataBase {
         return optionThatUserChoose;
     }
 
-    public String getTheUserChoosesIsTOrN() {
-        return theUserChoosesIsTOrN;
+    public String getTheUserChoosesIsYOrN() {
+        return theUserChoosesIsYOrN;
     }
 
-    public void setTheUserChoosesIsTOrN(String theUserChoosesIsTOrN) {
-        this.theUserChoosesIsTOrN = theUserChoosesIsTOrN;
+    public boolean isResetGame() {
+        return resetGame;
+    }
+
+    public void setResetGame(boolean resetGame) {
+        this.resetGame = resetGame;
+    }
+
+    public void setTheUserChoosesIsYOrN(String theUserChoosesIsYOrN) {
+        this.theUserChoosesIsYOrN = theUserChoosesIsYOrN.toLowerCase();
     }
 
     public void setOptionThatUserChoose(String optionThatUserChoose) {
-        this.optionThatUserChoose = optionThatUserChoose;
+        this.optionThatUserChoose = optionThatUserChoose.toLowerCase();
     }
 
     public boolean isEndGame() {
