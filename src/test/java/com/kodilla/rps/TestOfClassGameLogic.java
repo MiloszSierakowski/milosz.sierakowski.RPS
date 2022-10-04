@@ -11,7 +11,7 @@ public class TestOfClassGameLogic {
     @BeforeEach
     void setUp(){
         gameDataBase = new GameDataBase();
-        gameLogic = new GameLogic(gameDataBase,new GameGui(gameDataBase));
+        gameLogic = new GameLogic(gameDataBase);
     }
 
 /*    @Test

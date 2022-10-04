@@ -1,11 +1,15 @@
 package com.kodilla.rps;
 
+import com.kodilla.rps.moves.GameFigures;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class GameDataBase {
     private User user;
     private int numberOfSmalWinsToWinTheGame;
+    private int counterOfComputerWins;
+    private int counterOfUserWins;
     private int currentRound = 0;
     private boolean endGame = false;
     private boolean resetGame = false;
@@ -22,7 +26,7 @@ public class GameDataBase {
         return numberOfSmalWinsToWinTheGame;
     }
 
-    public List<GameFigures> getrecordOfAllUserRounds() {
+    public List<GameFigures> getRecordOfAllUserRounds() {
         return recordOfAllUserRounds;
     }
 
@@ -46,6 +50,23 @@ public class GameDataBase {
         return resetGame;
     }
 
+    public int getCounterOfComputerWins() {
+        return counterOfComputerWins;
+    }
+
+    public int getCounterOfUserWins() {
+        return counterOfUserWins;
+    }
+
+    public void setCounterOfComputerWins() {
+        this.counterOfComputerWins += 1;
+    }
+
+
+    public void setCounterOfUserWins() {
+        this.counterOfUserWins += 1;
+    }
+
     public void setResetGame(boolean resetGame) {
         this.resetGame = resetGame;
     }
@@ -66,8 +87,8 @@ public class GameDataBase {
         this.endGame = endGame;
     }
 
-    public void setCurrentRound(int currentRound) {
-        this.currentRound = currentRound;
+    public void setCurrentRound() {
+        this.currentRound += 1;
     }
 
     public void setUser(User user) {

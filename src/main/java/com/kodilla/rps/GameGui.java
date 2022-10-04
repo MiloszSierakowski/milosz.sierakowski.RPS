@@ -59,19 +59,46 @@ public class GameGui {
         theUserChoosesToResetTheGameButIsUserSure();
     }
 
-    public void whenUserChooseYesToEndGame(){
+    public static void whenUserChooseYesToEndGame() {
         System.out.println("Gra zostanie zakonczona bez podania wyniku ");
     }
 
-    public void whenUserChooseNoToEndGame(){
+    public static void whenUserChooseNoToEndGame() {
         System.out.println("Gra jest kontynuowana ");
     }
 
-    public void whenUserChooseYesToResetTheGame(){
+    public static void whenUserChooseYesToResetTheGame() {
         System.out.println("Gra zostanie zresetowana ");
     }
 
-    public void whenUserChooseNoToResetTheGame(){
+    public static void whenUserChooseNoToResetTheGame() {
         System.out.println("Gra jest kontynuowana ");
     }
+
+    public static void whenIsDraw(String s) {
+        System.out.println("Komputer wylosowal " + s + " wiec jest remis ");
+    }
+
+    public static void whenIsComputerWin(String s) {
+        System.out.println("Komputer wylosowal " + s + " wiec wygrywa runde ");
+    }
+
+    public static void whenIsComputerLose(String s) {
+        System.out.println("Komputer wylosowal " + s + " wiec przegrywa runde ");
+    }
+
+    public static void infoWhatUserChoose(String s, GameDataBase gameDataBase) {
+        System.out.println("Urzytkownik " + gameDataBase.getUser().getName() + " wybral do zagrania " + s);
+    }
+
+    public static void resultOfRound(GameDataBase gameDataBase){
+        System.out.println("Wynik po rundzie numer " + (gameDataBase.getCurrentRound()+1) + " jest " +
+                gameDataBase.getCounterOfUserWins() + " wygranych dla " + gameDataBase.getUser().getName() +
+                " oraz " + gameDataBase.getCounterOfComputerWins() + " wygranych dla komputera");
+    }
+
+    public static void infoAboutNumberCurrentRound(GameDataBase gameDataBase){
+        System.out.println("Rozpoczynamy runde " + (gameDataBase.getCurrentRound()+1));
+    }
+
 }
