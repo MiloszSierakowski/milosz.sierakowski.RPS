@@ -101,4 +101,13 @@ public class GameGui {
         System.out.println("Rozpoczynamy runde " + (gameDataBase.getCurrentRound()+1));
     }
 
+    public static void userWinTheGame(GameDataBase gameDataBase){
+        System.out.println("Gratulacje " + gameDataBase.getUser().getName() + " wygrales z komputerem Twoje punkty to: " +
+                gameDataBase.getCounterOfComputerWins() + " natomiast komputera " + gameDataBase.getCounterOfComputerWins());
+    }
+    public static void computerWinTheGame(GameDataBase gameDataBase){
+        System.out.println("Niestey " + gameDataBase.getUser().getName() + " przegrales z komputerem Twoje punkty to: " +
+                gameDataBase.getCounterOfComputerWins() + " natomiast komputera " +
+                gameDataBase.getCounterOfComputerWins() + " Sprubuj ponownie.");
+    }
 }

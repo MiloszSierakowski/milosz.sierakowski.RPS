@@ -1,5 +1,7 @@
 package com.kodilla.rps;
 
+import com.kodilla.rps.gameLogic.GameLogic;
+
 public class RpsRunner {
     public static void main(String[] args) {
         boolean endGame;

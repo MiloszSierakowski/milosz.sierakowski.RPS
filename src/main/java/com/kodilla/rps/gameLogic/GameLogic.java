@@ -1,12 +1,20 @@
-package com.kodilla.rps;
+package com.kodilla.rps.gameLogic;
 
+import com.kodilla.rps.GameDataBase;
+import com.kodilla.rps.GameGui;
 import com.kodilla.rps.moves.*;
 
 import java.util.List;
-import java.util.Random;
 
 public class GameLogic {
     private final GameDataBase gameDataBase;
+    private boolean hardMode = true;
+
+    public boolean isHardMode() {
+        return hardMode;
+    }
+
+    private final ComputerHardModeOrEasy computerHardModeOrEasy = new ComputerHardModeOrEasy();
 
     public GameLogic(GameDataBase gameDataBase) {
         this.gameDataBase = gameDataBase;
@@ -42,18 +50,7 @@ public class GameLogic {
         }
     }
 
-    private void computerMakesMove() {
-        Random random = new Random();
-        int computerMove = random.nextInt(3) + 1;
-        switch (computerMove) {
-            case 1 -> gameDataBase.addComputerMoveInThisRound(new Rock());
-            case 2 -> gameDataBase.addComputerMoveInThisRound(new Paper());
-            case 3 -> gameDataBase.addComputerMoveInThisRound(new Scissors());
-        }
-    }
-
     private String takeComputerMove() {
-        computerMakesMove();
         List<GameFigures> listWithComputerMovements = gameDataBase.getRecordOfAllComputerRounds();
         int actualRound = gameDataBase.getCurrentRound();
         return listWithComputerMovements.get(actualRound).getClass().getSimpleName();
@@ -65,7 +62,8 @@ public class GameLogic {
         return listWithUserMovements.get(actualRound).getClass().getSimpleName();
     }
 
-    private void logicForRockClass() {
+    private void logicForRock() {
+        computerHardModeOrEasy.decideWithComputerModeUseForRockLogic(isHardMode(),gameDataBase);
         String s = takeComputerMove();
         switch (s) {
             case "Rock" -> GameGui.whenIsDraw(s);
@@ -80,7 +78,8 @@ public class GameLogic {
         }
     }
 
-    private void logicForPaperClass() {
+    private void logicForPaper() {
+        computerHardModeOrEasy.decideWithComputerModeUseForPaperLogic(isHardMode(),gameDataBase);
         String s = takeComputerMove();
         switch (s) {
             case "Paper" -> GameGui.whenIsDraw(s);
@@ -95,7 +94,8 @@ public class GameLogic {
         }
     }
 
-    private void logicForScissorsClass() {
+    private void logicForScissors() {
+        computerHardModeOrEasy.decideWithComputerModeUseForScissorsLogic(isHardMode(),gameDataBase);
         String s = takeComputerMove();
         switch (s) {
             case "Paper" -> {
@@ -114,14 +114,14 @@ public class GameLogic {
         String s = takeUserMove();
         GameGui.infoWhatUserChoose(s, gameDataBase);
         switch (s) {
-            case "Rock" -> logicForRockClass();
-            case "Paper" -> logicForPaperClass();
-            case "Scissors" -> logicForScissorsClass();
+            case "Rock" -> logicForRock();
+            case "Paper" -> logicForPaper();
+            case "Scissors" -> logicForScissors();
         }
     }
 
-    private void runTheProgramIfValueIsNotNull(){
-        if (!gameDataBase.getRecordOfAllUserRounds().isEmpty()){
+    private void runTheLogicResponsibleForCheckingWhoWonTheRoundIfResetIsNotTrue() {
+        if (!gameDataBase.isResetGame()) {
             takeUserMovementInThisRoundAndPassItFurther();
             GameGui.resultOfRound(gameDataBase);
             gameDataBase.setCurrentRound();
@@ -130,7 +130,33 @@ public class GameLogic {
     }
 
     public void resultOfRoundAndGoToNextRound() {
-        runTheProgramIfValueIsNotNull();
+        runTheLogicResponsibleForCheckingWhoWonTheRoundIfResetIsNotTrue();
+    }
+
+    public void checkIfIsNotEndOfGame(){
+        int endGame = gameDataBase.getNumberOfSmalWinsToWinTheGame();
+        int userWins = gameDataBase.getCounterOfUserWins();
+        int computerWins = gameDataBase.getCounterOfComputerWins();
+
+    }
+
+    public boolean playerWinTheGame(int endGame, int userWin){
+        if (endGame == userWin){
+            GameGui.userWinTheGame(gameDataBase);
+            return true;
+        }
+        return false;
+    }
+    public boolean computerWinTheGame(int endGame, int computerWins){
+        if (endGame == computerWins){
+            GameGui.computerWinTheGame(gameDataBase);
+            return true;
+        }
+        return false;
+    }
+
+    public void setEndTheGame(){
+
     }
 
 }

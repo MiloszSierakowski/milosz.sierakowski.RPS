@@ -1,7 +1,7 @@
 package com.kodilla.rps;
 
+import com.kodilla.rps.gameLogic.GameLogic;
 import org.junit.jupiter.api.*;
-import static org.junit.jupiter.api.Assertions.*;
 
 
 public class TestOfClassGameLogic {
