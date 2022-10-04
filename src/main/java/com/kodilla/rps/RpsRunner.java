@@ -6,7 +6,6 @@ public class RpsRunner {
     public static void main(String[] args) {
         boolean endGame;
         do {
-
             GameDataBase gameDataBase = new GameDataBase();
             GameGui gameGui = new GameGui(gameDataBase);
             GameLogic gameLogic = new GameLogic(gameDataBase);
@@ -20,9 +19,16 @@ public class RpsRunner {
                 gameGui.ifTheUserChooseNOrXAskHimToAcceptTheChoice();
                 gameLogic.whatOptionUserChooseAndDecideWhatToDo();
                 gameLogic.resultOfRoundAndGoToNextRound();
+                gameLogic.checkIfIsNotEndOfGame();
+                gameGui.infoAboutNumberCurrentRound();
 
-                endGame = gameDataBase.isEndGame();
             } while (!gameDataBase.isResetGame());
+
+            do {
+                gameGui.finalMassageOrNot();
+                gameLogic.checkWhatUserWhatToDoAfterEndOfGame();
+                endGame = gameDataBase.isEndGame();
+            } while (!gameDataBase.isAfterChooseNAndGameIsEnd());
 
         } while (!endGame);
 

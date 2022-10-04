@@ -13,8 +13,11 @@ public class GameDataBase {
     private int currentRound = 0;
     private boolean endGame = false;
     private boolean resetGame = false;
+
+    private boolean afterChooseNAndGameIsEnd = false;
     private String optionThatUserChoose;
     private String theUserChoosesIsYOrN;
+
     private List<GameFigures> recordOfAllUserRounds = new ArrayList<>();
     private List<GameFigures> recordOfAllComputerRounds = new ArrayList<>();
 
@@ -58,10 +61,17 @@ public class GameDataBase {
         return counterOfUserWins;
     }
 
+    public boolean isAfterChooseNAndGameIsEnd() {
+        return afterChooseNAndGameIsEnd;
+    }
+
+    public void setAfterChooseNAndGameIsEnd(boolean afterChooseNAndGameIsEnd) {
+        this.afterChooseNAndGameIsEnd = afterChooseNAndGameIsEnd;
+    }
+
     public void setCounterOfComputerWins() {
         this.counterOfComputerWins += 1;
     }
-
 
     public void setCounterOfUserWins() {
         this.counterOfUserWins += 1;

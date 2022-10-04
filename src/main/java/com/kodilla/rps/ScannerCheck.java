@@ -73,19 +73,16 @@ public class ScannerCheck {
                 return false;
             }
         } else {
-            System.out.println("Wpisana wartość moze posiadac tylko liczby prosze sprubowac ponownie ");
+            System.out.println("Wpisana wartosc moze posiadac tylko liczby prosze sprubowac ponownie ");
             return false;
         }
         return true;
     }
 
     public int takeNumberOfWinsAndGiveItToGameGui() {
-        boolean goodValue;
-
         do {
             setFinalNumberWinRoundsToWinGameBeforeChecks();
-            goodValue = checkAllConditionForNumberOfWinRoundsToWinTheGame();
-        } while (!goodValue);
+        } while (!checkAllConditionForNumberOfWinRoundsToWinTheGame());
 
         return getFinalNumberWinRoundsToWinGame();
     }
@@ -166,4 +163,22 @@ public class ScannerCheck {
         return getYOrNThatTheUserChoosesForEndTheGameOrRestart();
     }
 
+    public boolean allConditionsAndFinalResultOfWhatUserChooseAtEndOfGame() {
+        if (checkIfSizeOfOptionThatTheUserChoosesHasOnlyOneLetter()) {
+            if (!ifTheUserChoosesIsXOrN()) {
+                System.out.println("Wprowadzona opcja jest nie prawidlowa prosze sprubowac ponownie ");
+                return false;
+            }
+        } else {
+            System.out.println("Wprowadzona opcja jest nie prawidlowa sklada sie z wiecej niz jednego zanku prosze to poprawic");
+            return false;
+        }
+        return true;
+    }
+    public String takeOptionWhatUserChooseAtEndOfGameAndGiveItToGui() {
+        do {
+            setOptionThatTheUserChooses();
+        } while (!allConditionsAndFinalResultOfWhatUserChooseAtEndOfGame());
+        return getOptionThatTheUserChooses();
+    }
 }

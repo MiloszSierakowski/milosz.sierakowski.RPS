@@ -47,7 +47,7 @@ public class GameGui {
 
     private void theUserChoosesToResetTheGameButIsUserSure() {
         if (gameDataBase.getOptionThatUserChoose().contains("n")) {
-            System.out.println("Wybrana opcja zakonczy gre czy jestes tego pewny " +
+            System.out.println("Wybrana opcja zresetuje gre czy jestes tego pewny " +
                     "wcisnij i potwierdz enterem [Y/N] ");
             String temporaryString = scannerCheck.takeTheUserChoosesIsYOrNAndGiveItToGui();
             gameDataBase.setTheUserChoosesIsYOrN(temporaryString);
@@ -60,19 +60,17 @@ public class GameGui {
     }
 
     public static void whenUserChooseYesToEndGame() {
-        System.out.println("Gra zostanie zakonczona bez podania wyniku ");
-    }
-
-    public static void whenUserChooseNoToEndGame() {
-        System.out.println("Gra jest kontynuowana ");
+        System.out.println("Gra zostanie zakonczona ");
     }
 
     public static void whenUserChooseYesToResetTheGame() {
         System.out.println("Gra zostanie zresetowana ");
     }
 
-    public static void whenUserChooseNoToResetTheGame() {
-        System.out.println("Gra jest kontynuowana ");
+    public static void whenUserChooseNoToResetTheGameOrResetTheGame(GameDataBase gameDataBase) {
+        if (!gameDataBase.isResetGame()) {
+            System.out.println("Gra jest kontynuowana ");
+        }
     }
 
     public static void whenIsDraw(String s) {
@@ -91,23 +89,40 @@ public class GameGui {
         System.out.println("Urzytkownik " + gameDataBase.getUser().getName() + " wybral do zagrania " + s);
     }
 
-    public static void resultOfRound(GameDataBase gameDataBase){
-        System.out.println("Wynik po rundzie numer " + (gameDataBase.getCurrentRound()+1) + " jest " +
+    public static void resultOfRound(GameDataBase gameDataBase) {
+        System.out.println("Wynik po rundzie numer " + (gameDataBase.getCurrentRound() + 1) + " jest " +
                 gameDataBase.getCounterOfUserWins() + " wygranych dla " + gameDataBase.getUser().getName() +
                 " oraz " + gameDataBase.getCounterOfComputerWins() + " wygranych dla komputera");
     }
 
-    public static void infoAboutNumberCurrentRound(GameDataBase gameDataBase){
-        System.out.println("Rozpoczynamy runde " + (gameDataBase.getCurrentRound()+1));
+    public void infoAboutNumberCurrentRound() {
+        if (!gameDataBase.isResetGame()) {
+            System.out.println("Rozpoczynamy runde " + (gameDataBase.getCurrentRound() + 1));
+        }
     }
 
-    public static void userWinTheGame(GameDataBase gameDataBase){
+    public static void userWinTheGame(GameDataBase gameDataBase) {
         System.out.println("Gratulacje " + gameDataBase.getUser().getName() + " wygrales z komputerem Twoje punkty to: " +
-                gameDataBase.getCounterOfComputerWins() + " natomiast komputera " + gameDataBase.getCounterOfComputerWins());
+                gameDataBase.getCounterOfUserWins() + " natomiast komputera " + gameDataBase.getCounterOfComputerWins());
     }
-    public static void computerWinTheGame(GameDataBase gameDataBase){
+
+    public static void computerWinTheGame(GameDataBase gameDataBase) {
         System.out.println("Niestey " + gameDataBase.getUser().getName() + " przegrales z komputerem Twoje punkty to: " +
-                gameDataBase.getCounterOfComputerWins() + " natomiast komputera " +
+                gameDataBase.getCounterOfUserWins() + " natomiast komputera " +
                 gameDataBase.getCounterOfComputerWins() + " Sprubuj ponownie.");
+    }
+
+    public void askUserIfHeWontEndOrStartNewGame() {
+        System.out.println("Wiec pozostaje pytanie czy chcesz zakonczyc gre?" +
+                " wcisnij \"x\" jesli chcesz zakoczyc lub \"n\" jesli chcesz zagrac jeszcze raz ");
+        String temporaryString = scannerCheck.takeOptionWhatUserChooseAtEndOfGameAndGiveItToGui();
+        gameDataBase.setOptionThatUserChoose(temporaryString);
+    }
+
+    public void finalMassageOrNot() {
+        if (!gameDataBase.isEndGame() && gameDataBase.isResetGame()) {
+            askUserIfHeWontEndOrStartNewGame();
+            ifTheUserChooseNOrXAskHimToAcceptTheChoice();
+        }
     }
 }

@@ -36,8 +36,9 @@ public class GameLogic {
             GameGui.whenUserChooseYesToEndGame();
             gameDataBase.setEndGame(true);
             gameDataBase.setResetGame(true);
+            gameDataBase.setAfterChooseNAndGameIsEnd(true);
         } else {
-            GameGui.whenUserChooseNoToEndGame();
+            GameGui.whenUserChooseNoToResetTheGameOrResetTheGame(gameDataBase);
         }
     }
 
@@ -45,8 +46,9 @@ public class GameLogic {
         if (gameDataBase.getTheUserChoosesIsYOrN().contains("y")) {
             GameGui.whenUserChooseYesToResetTheGame();
             gameDataBase.setResetGame(true);
+            gameDataBase.setAfterChooseNAndGameIsEnd(true);
         } else {
-            GameGui.whenUserChooseNoToResetTheGame();
+            GameGui.whenUserChooseNoToResetTheGameOrResetTheGame(gameDataBase);
         }
     }
 
@@ -63,7 +65,7 @@ public class GameLogic {
     }
 
     private void logicForRock() {
-        computerHardModeOrEasy.decideWithComputerModeUseForRockLogic(isHardMode(),gameDataBase);
+        computerHardModeOrEasy.decideWithComputerModeUseForRockLogic(isHardMode(), gameDataBase);
         String s = takeComputerMove();
         switch (s) {
             case "Rock" -> GameGui.whenIsDraw(s);
@@ -79,7 +81,7 @@ public class GameLogic {
     }
 
     private void logicForPaper() {
-        computerHardModeOrEasy.decideWithComputerModeUseForPaperLogic(isHardMode(),gameDataBase);
+        computerHardModeOrEasy.decideWithComputerModeUseForPaperLogic(isHardMode(), gameDataBase);
         String s = takeComputerMove();
         switch (s) {
             case "Paper" -> GameGui.whenIsDraw(s);
@@ -95,7 +97,7 @@ public class GameLogic {
     }
 
     private void logicForScissors() {
-        computerHardModeOrEasy.decideWithComputerModeUseForScissorsLogic(isHardMode(),gameDataBase);
+        computerHardModeOrEasy.decideWithComputerModeUseForScissorsLogic(isHardMode(), gameDataBase);
         String s = takeComputerMove();
         switch (s) {
             case "Paper" -> {
@@ -125,7 +127,6 @@ public class GameLogic {
             takeUserMovementInThisRoundAndPassItFurther();
             GameGui.resultOfRound(gameDataBase);
             gameDataBase.setCurrentRound();
-            GameGui.infoAboutNumberCurrentRound(gameDataBase);
         }
     }
 
@@ -133,30 +134,41 @@ public class GameLogic {
         runTheLogicResponsibleForCheckingWhoWonTheRoundIfResetIsNotTrue();
     }
 
-    public void checkIfIsNotEndOfGame(){
+    public void checkIfIsNotEndOfGame() {
         int endGame = gameDataBase.getNumberOfSmalWinsToWinTheGame();
-        int userWins = gameDataBase.getCounterOfUserWins();
-        int computerWins = gameDataBase.getCounterOfComputerWins();
-
+        int userWin = gameDataBase.getCounterOfUserWins();
+        int computerWin = gameDataBase.getCounterOfComputerWins();
+        setEndTheGameIfThisIsTheEnd(endGame, userWin, computerWin);
     }
 
-    public boolean playerWinTheGame(int endGame, int userWin){
-        if (endGame == userWin){
+    private boolean playerWinTheGame(int endGame, int userWin) {
+        if (endGame == userWin) {
             GameGui.userWinTheGame(gameDataBase);
             return true;
         }
         return false;
     }
-    public boolean computerWinTheGame(int endGame, int computerWins){
-        if (endGame == computerWins){
+
+    private boolean computerWinTheGame(int endGame, int computerWins) {
+        if (endGame == computerWins) {
             GameGui.computerWinTheGame(gameDataBase);
             return true;
         }
         return false;
     }
 
-    public void setEndTheGame(){
-
+    private void setEndTheGameIfThisIsTheEnd(int endGame, int userWin, int computerWins) {
+        if (playerWinTheGame(endGame, userWin)) {
+            gameDataBase.setResetGame(true);
+        }
+        if (computerWinTheGame(endGame, computerWins)) {
+            gameDataBase.setResetGame(true);
+        }
     }
 
+    public void checkWhatUserWhatToDoAfterEndOfGame() {
+        if (!gameDataBase.isEndGame() && gameDataBase.isResetGame()){
+            whatOptionUserChooseAndDecideWhatToDo();
+        }
+    }
 }
