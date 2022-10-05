@@ -13,11 +13,9 @@ public class GameDataBase {
     private int currentRound = 0;
     private boolean endGame = false;
     private boolean resetGame = false;
-
     private boolean afterChooseNAndGameIsEnd = false;
     private String optionThatUserChoose;
     private String theUserChoosesIsYOrN;
-
     private List<GameFigures> recordOfAllUserRounds = new ArrayList<>();
     private List<GameFigures> recordOfAllComputerRounds = new ArrayList<>();
 

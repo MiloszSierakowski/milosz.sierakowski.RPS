@@ -8,12 +8,9 @@ import com.kodilla.rps.moves.Scissors;
 import java.util.Random;
 
 public class ComputerHardModeOrEasy {
-
-
     private final Random random = new Random();
     private int computerMove;
     private int valueHowBigChanceComputerHasToDraftInPercent = 50;
-
     private int valueHowBigChanceComputerHasToWinInPercent = 25;
 
     public int getValueHowBigChanceComputerHasToDraftInPercent() {

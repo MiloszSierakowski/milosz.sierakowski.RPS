@@ -123,7 +123,7 @@ public class GameLogic {
     }
 
     private void runTheLogicResponsibleForCheckingWhoWonTheRoundIfResetIsNotTrue() {
-        if (!gameDataBase.isResetGame()) {
+        if (!gameDataBase.getRecordOfAllUserRounds().isEmpty()) {
             takeUserMovementInThisRoundAndPassItFurther();
             GameGui.resultOfRound(gameDataBase);
             gameDataBase.setCurrentRound();
@@ -167,7 +167,7 @@ public class GameLogic {
     }
 
     public void checkWhatUserWhatToDoAfterEndOfGame() {
-        if (!gameDataBase.isEndGame() && gameDataBase.isResetGame()){
+        if (!gameDataBase.isEndGame() && gameDataBase.isResetGame()) {
             whatOptionUserChooseAndDecideWhatToDo();
         }
     }

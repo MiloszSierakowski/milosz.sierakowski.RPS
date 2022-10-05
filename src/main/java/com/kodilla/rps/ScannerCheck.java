@@ -10,7 +10,6 @@ public class ScannerCheck {
     private String optionThatTheUserChooses = "";
     private String yOrNThatTheUserChoosesForEndTheGameOrRestart = "";
 
-
     public int getFinalNumberWinRoundsToWinGame() {
         return finalNumberWinRoundsToWinGame;
     }
@@ -146,7 +145,7 @@ public class ScannerCheck {
     public boolean allConditionsAndFinalResultOfTheUserChoosesIsYOrN() {
         if (checkIfSizeTheUserChoosesIsYOrNHasOnlyOneLetter()) {
             if (!ifTheUserChoosesIsYOrN()) {
-                System.out.println("Wprowadzona odpowiedz to nie jest litera T lub N prosze o poprawienie ");
+                System.out.println("Wprowadzona odpowiedz to nie jest litera Y lub N prosze o poprawienie ");
                 return false;
             }
         } else {
@@ -175,6 +174,7 @@ public class ScannerCheck {
         }
         return true;
     }
+
     public String takeOptionWhatUserChooseAtEndOfGameAndGiveItToGui() {
         do {
             setOptionThatTheUserChooses();

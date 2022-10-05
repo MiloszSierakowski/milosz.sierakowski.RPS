@@ -9,7 +9,7 @@ public class TestOfClassGameLogic {
     private GameLogic gameLogic;
 
     @BeforeEach
-    void setUp(){
+    void setUp() {
         gameDataBase = new GameDataBase();
         gameLogic = new GameLogic(gameDataBase);
     }
