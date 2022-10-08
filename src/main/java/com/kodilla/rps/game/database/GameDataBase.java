@@ -1,5 +1,6 @@
-package com.kodilla.rps;
+package com.kodilla.rps.game.database;
 
+import com.kodilla.rps.User;
 import com.kodilla.rps.moves.GameFigures;
 
 import java.util.ArrayList;

@@ -1,6 +1,8 @@
 package com.kodilla.rps;
 
-import com.kodilla.rps.gameLogic.GameLogic;
+import com.kodilla.rps.game.gui.GameGui;
+import com.kodilla.rps.game.logic.GameLogic;
+import com.kodilla.rps.game.database.GameDataBase;
 
 public class RpsRunner {
     public static void main(String[] args) {
@@ -15,14 +17,12 @@ public class RpsRunner {
             gameGui.userOptionsExplanation();
 
             do {
-
                 gameGui.getUserSelection();
                 gameGui.ifTheUserChooseNOrXAskHimToAcceptTheChoice();
                 gameLogic.whatOptionUserChooseAndDecideWhatToDo();
                 gameLogic.resultOfRoundAndGoToNextRound();
                 gameLogic.checkIfIsNotEndOfGame();
                 gameGui.infoAboutNumberCurrentRound();
-
             } while (!gameDataBase.isResetGame());
 
             do {

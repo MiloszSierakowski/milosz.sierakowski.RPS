@@ -1,7 +1,8 @@
 package com.kodilla.rps.moves;
 
-public class Paper implements GameFigures {
-    private final String name = "Papier";
+public class Lizard implements GameFigures{
+    private final String name = "Jaszczurka";
+
     public String getName() {
         return name;
     }

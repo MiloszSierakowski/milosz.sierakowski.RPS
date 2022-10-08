@@ -1,5 +1,6 @@
 package com.kodilla.rps;
 
+import com.kodilla.rps.game.scanner.ScannerCheck;
 import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.*;

@@ -1,4 +1,8 @@
-package com.kodilla.rps;
+package com.kodilla.rps.game.gui;
+
+import com.kodilla.rps.game.scanner.ScannerCheck;
+import com.kodilla.rps.User;
+import com.kodilla.rps.game.database.GameDataBase;
 
 public class GameGui {
     private final GameDataBase gameDataBase;
@@ -26,8 +30,20 @@ public class GameGui {
                 "klawisz 1 - zagranie \"kamien\",\n" +
                 "klawisz 2 - zagranie \"papier\",\n" +
                 "klawisz 3 - zagranie \"nozyce\",\n" +
+                "klawisz 4 - zagranie \"spock\",\n" +
+                "klawisz 5 - zagranie \"jaszczurka\",\n" +
                 "klawisz x - zakonczenie gry , \n" +
-                "klawisz n - uruchomienie gry od nowa");
+                "klawisz n - uruchomienie gry od nowa\n ");
+        additionalExplanationHowToWinRound();
+    }
+
+    public void additionalExplanationHowToWinRound(){
+        System.out.println("Z racji tego ze gra posiada pare dodatkowych zagran uznalismy ze stosownym bedzie je wszystkie wytlumaczyc \n " +
+         "wiec wybor danego ruchu skutkuje: \n kamieni -> WYGRYWA z nozycami i jaszczorka ale PRZEGRYWA z papierem oraz spockiem REMIS kiedy przeciwnik da kamien \n " +
+                "papier -> WYGRYWA z kamieniem i spockiem ale PRZEGRYWA z nozyczkami oraz jaszczorka REMIS kiedy przeciwnik da papier \n " +
+                "nozyce -> WYGRYWA z papier i jaszczorka ale PRZEGRYWA z kamieniem oraz spockiem REMIS kiedy przeciwnik da nozyczki \n " +
+                "spock -> WYGRYWA z nozycami i kamieniem ale PRZEGRYWA z papierem oraz jaszczurka REMIS kiedy przeciwnik da spocka \n " +
+                "jaszczurka -> WYGRYWA z papierem i spockiem ale PRZEGRYWA z kamieniem oraz nozyczkami REMIS kiedy przeciwnik da jaszczurka \n ");
     }
 
     public void getUserSelection() {

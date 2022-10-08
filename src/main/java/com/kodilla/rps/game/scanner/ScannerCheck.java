@@ -1,4 +1,4 @@
-package com.kodilla.rps;
+package com.kodilla.rps.game.scanner;
 
 import java.util.Scanner;
 
@@ -107,7 +107,7 @@ public class ScannerCheck {
     }
 
     public boolean ifTheUserChoosesIsIntFrom1To3() {
-        return getOptionThatTheUserChooses().matches("[1-3]");
+        return getOptionThatTheUserChooses().matches("[1-5]");
     }
 
     public boolean ifTheUserChoosesIsXOrN() {
@@ -149,7 +149,7 @@ public class ScannerCheck {
                 return false;
             }
         } else {
-            System.out.println("Zostalo wpisanych za duzo znakow prosze powturzyc ");
+            System.out.println("Zostalo wpisanych za duzo znakow prosze powtorzyc ");
             return false;
         }
         return true;
