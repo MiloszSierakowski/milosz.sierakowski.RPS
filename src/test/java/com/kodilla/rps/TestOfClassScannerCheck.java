@@ -96,13 +96,13 @@ public class TestOfClassScannerCheck {
         @Test
         void testOfMethodIfTheValueOptionThatTheUserChoosesIsIntFrom1To3WhenInputIs1() {
             scannerCheck.setOptionThatTheUserChooses("1");
-            assertTrue(scannerCheck::ifTheUserChoosesIsIntFrom1To3);
+            assertTrue(scannerCheck::ifTheUserChoosesIsIntFrom1To5);
         }
 
         @Test
-        void testOfMethodIfTheValueOptionThatTheUserChoosesIsIntFrom1To3WhenInputIs4() {
-            scannerCheck.setOptionThatTheUserChooses("4");
-            assertFalse(scannerCheck::ifTheUserChoosesIsIntFrom1To3);
+        void testOfMethodIfTheValueOptionThatTheUserChoosesIsIntFrom1To5WhenInputIs6() {
+            scannerCheck.setOptionThatTheUserChooses("6");
+            assertFalse(scannerCheck::ifTheUserChoosesIsIntFrom1To5);
         }
 
         @Test
@@ -198,6 +198,18 @@ public class TestOfClassScannerCheck {
             scannerCheck.setYOrNThatTheUserChoosesForEndTheGameOrRestart("X");
             assertFalse(scannerCheck::allConditionsAndFinalResultOfTheUserChoosesIsYOrN);
         }
+    }
+
+    @Test
+    void TestOfMethodAllConditionsAndFinalResultOfWhatUserChooseAtEndOfGameWhenInputIsOk(){
+        scannerCheck.setOptionThatTheUserChooses("x");
+        assertTrue(scannerCheck::allConditionsAndFinalResultOfWhatUserChooseAtEndOfGame);
+    }
+
+    @Test
+    void TestOfMethodAllConditionsAndFinalResultOfWhatUserChooseAtEndOfGameWhenInputIsWrong(){
+        scannerCheck.setOptionThatTheUserChooses("a");
+        assertFalse(scannerCheck::allConditionsAndFinalResultOfWhatUserChooseAtEndOfGame);
     }
 
 }

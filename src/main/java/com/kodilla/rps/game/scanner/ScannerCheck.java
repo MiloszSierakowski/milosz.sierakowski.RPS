@@ -106,7 +106,7 @@ public class ScannerCheck {
         return getOptionThatTheUserChooses().length() == 1;
     }
 
-    public boolean ifTheUserChoosesIsIntFrom1To3() {
+    public boolean ifTheUserChoosesIsIntFrom1To5() {
         return getOptionThatTheUserChooses().matches("[1-5]");
     }
 
@@ -116,7 +116,7 @@ public class ScannerCheck {
 
     public boolean allConditionsAndFinalResultOfTheValueOptionThatTheUserChooses() {
         if (checkIfSizeOfOptionThatTheUserChoosesHasOnlyOneLetter()) {
-            if (!ifTheUserChoosesIsIntFrom1To3() && !ifTheUserChoosesIsXOrN()) {
+            if (!ifTheUserChoosesIsIntFrom1To5() && !ifTheUserChoosesIsXOrN()) {
                 System.out.println("Wprowadzona opcja jest nie prawidlowa prosze sprubowac ponownie ");
                 return false;
             }

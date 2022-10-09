@@ -14,56 +14,84 @@ public class GameLogic {
         return hardMode;
     }
 
-    private final ComputerHardModeOrEasy computerHardModeOrEasy = new ComputerHardModeOrEasy();
+    private final ComputerHardModeOrEasy computerHardModeOrEasy;
 
     public GameLogic(GameDataBase gameDataBase) {
         this.gameDataBase = gameDataBase;
+        this.computerHardModeOrEasy = new ComputerHardModeOrEasy();
     }
 
-    public void whatOptionUserChooseAndDecideWhatToDo() {
-        String s = gameDataBase.getOptionThatUserChoose();
-        switch (s) {
-            case "1" -> gameDataBase.addUserMoveInThisRound(new Rock());
-            case "2" -> gameDataBase.addUserMoveInThisRound(new Paper());
-            case "3" -> gameDataBase.addUserMoveInThisRound(new Scissors());
-            case "4" -> gameDataBase.addUserMoveInThisRound(new Spock());
-            case "5" -> gameDataBase.addUserMoveInThisRound(new Lizard());
-            case "x" -> printMessageToUserAndMakeActionDependsIfHeWantsEndTheGameOrNo();
-            case "n" -> printMessageToUserAndMakeActionDependsIfHeWantsResetTheGameOrNo();
+    public GameLogic(GameDataBase gameDataBase, ComputerHardModeOrEasy computerHardModeOrEasy) {
+        this.gameDataBase = gameDataBase;
+        this.computerHardModeOrEasy = computerHardModeOrEasy;
+    }
+
+
+    private boolean ifOptionUserChooseIsEmptyOrNull() {
+        return !gameDataBase.getOptionThatUserChoose().isEmpty() && gameDataBase.getOptionThatUserChoose() != null;
+    }
+
+    public void whatOptionUserChooseAndDecideWhatToDoAndGivePermissionToRunLogic() {
+        gameDataBase.setAllowToRunLogicOfRoundWin(true);
+        if (ifOptionUserChooseIsEmptyOrNull()) {
+            String s = gameDataBase.getOptionThatUserChoose();
+            switch (s) {
+                case "1" -> gameDataBase.addUserMoveInThisRound(new Rock());
+                case "2" -> gameDataBase.addUserMoveInThisRound(new Paper());
+                case "3" -> gameDataBase.addUserMoveInThisRound(new Scissors());
+                case "4" -> gameDataBase.addUserMoveInThisRound(new Spock());
+                case "5" -> gameDataBase.addUserMoveInThisRound(new Lizard());
+                case "x" -> printMessageToUserAndMakeActionDependsIfHeWantsEndTheGameOrNo();
+                case "n" -> printMessageToUserAndMakeActionDependsIfHeWantsResetTheGameOrNo();
+            }
         }
     }
 
-    public void printMessageToUserAndMakeActionDependsIfHeWantsEndTheGameOrNo() {
+    private void printMessageToUserAndMakeActionDependsIfHeWantsEndTheGameOrNo() {
+        gameDataBase.setAllowToRunLogicOfRoundWin(false);
         if (gameDataBase.getTheUserChoosesIsYOrN().contains("y")) {
             GameGui.whenUserChooseYesToEndGame();
             gameDataBase.setEndGame(true);
             gameDataBase.setResetGame(true);
-            gameDataBase.setAfterChooseNAndGameIsEnd(true);
+            gameDataBase.setAfterChooseNoAndGameIsEnd(true);
         } else {
-            GameGui.whenUserChooseNoToResetTheGameOrResetTheGame(gameDataBase);
+            GameGui.whenUserChooseDoNotResetTheGameOrDoNotEndTheGame(gameDataBase);
         }
     }
 
-    public void printMessageToUserAndMakeActionDependsIfHeWantsResetTheGameOrNo() {
+    private void printMessageToUserAndMakeActionDependsIfHeWantsResetTheGameOrNo() {
+        gameDataBase.setAllowToRunLogicOfRoundWin(false);
         if (gameDataBase.getTheUserChoosesIsYOrN().contains("y")) {
             GameGui.whenUserChooseYesToResetTheGame();
             gameDataBase.setResetGame(true);
-            gameDataBase.setAfterChooseNAndGameIsEnd(true);
+            gameDataBase.setAfterChooseNoAndGameIsEnd(true);
         } else {
-            GameGui.whenUserChooseNoToResetTheGameOrResetTheGame(gameDataBase);
+            GameGui.whenUserChooseDoNotResetTheGameOrDoNotEndTheGame(gameDataBase);
         }
     }
 
+    private boolean checkIfRecordOfAllComputerRoundsIsEmptyOrInActualRoundIsNull(int actualRound) {
+        return !gameDataBase.getRecordOfAllComputerRounds().isEmpty() && gameDataBase.getRecordOfAllComputerRounds().get(actualRound) != null;
+    }
+
     private String takeComputerMove() {
-        List<GameFigures> listWithComputerMovements = gameDataBase.getRecordOfAllComputerRounds();
         int actualRound = gameDataBase.getCurrentRound();
-        return listWithComputerMovements.get(actualRound).getName();
+        if (checkIfRecordOfAllComputerRoundsIsEmptyOrInActualRoundIsNull(actualRound)) {
+            List<GameFigures> listWithComputerMovements = gameDataBase.getRecordOfAllComputerRounds();
+            return listWithComputerMovements.get(actualRound).getName();
+        } else return "List is empty or in actual round computer move is null";
+    }
+
+    private boolean checkIfRecordOfAllUserRoundsIsEmptyOrInActualRoundIsNull(int actualRound) {
+        return !gameDataBase.getRecordOfAllUserRounds().isEmpty() && gameDataBase.getRecordOfAllUserRounds().get(actualRound) != null;
     }
 
     private String takeUserMove() {
-        List<GameFigures> listWithUserMovements = gameDataBase.getRecordOfAllUserRounds();
         int actualRound = gameDataBase.getCurrentRound();
-        return listWithUserMovements.get(actualRound).getName();
+        if (checkIfRecordOfAllUserRoundsIsEmptyOrInActualRoundIsNull(actualRound)) {
+            List<GameFigures> listWithUserMovements = gameDataBase.getRecordOfAllUserRounds();
+            return listWithUserMovements.get(actualRound).getName();
+        } else return "List is empty or in actual round computer move is null";
     }
 
     private void setWinRoundForComputer(String s) {
@@ -91,8 +119,8 @@ public class GameLogic {
         String s = takeComputerMove();
         switch (s) {
             case "Papier" -> GameGui.whenIsDraw(s);
-            case "Nozyczki" , "Jaszczurka" -> setWinRoundForComputer(s);
-            case "Kamien" , "Spock" -> setWinRoundForUser(s);
+            case "Nozyczki", "Jaszczurka" -> setWinRoundForComputer(s);
+            case "Kamien", "Spock" -> setWinRoundForUser(s);
         }
     }
 
@@ -101,18 +129,18 @@ public class GameLogic {
         String s = takeComputerMove();
         switch (s) {
             case "Nozyczki" -> GameGui.whenIsDraw(s);
-            case "Kamien" , "Spock" -> setWinRoundForComputer(s);
-            case "Papier" , "Jaszczurka" -> setWinRoundForUser(s);
+            case "Kamien", "Spock" -> setWinRoundForComputer(s);
+            case "Papier", "Jaszczurka" -> setWinRoundForUser(s);
         }
     }
 
-    private void logicForSpok() {
+    private void logicForSpock() {
         computerHardModeOrEasy.computerHardModeMakesMoveVsSpock(isHardMode(), gameDataBase);
         String s = takeComputerMove();
         switch (s) {
             case "Spock" -> GameGui.whenIsDraw(s);
-            case "Papier" , "Jaszczurka" -> setWinRoundForComputer(s);
-            case "Kamien" , "Nozyczki" -> setWinRoundForUser(s);
+            case "Papier", "Jaszczurka" -> setWinRoundForComputer(s);
+            case "Kamien", "Nozyczki" -> setWinRoundForUser(s);
         }
     }
 
@@ -121,8 +149,8 @@ public class GameLogic {
         String s = takeComputerMove();
         switch (s) {
             case "Jaszczurka" -> GameGui.whenIsDraw(s);
-            case "Kamien" , "Nozyczki" -> setWinRoundForComputer(s);
-            case "Papier" , "Spock" -> setWinRoundForUser(s);
+            case "Kamien", "Nozyczki" -> setWinRoundForComputer(s);
+            case "Papier", "Spock" -> setWinRoundForUser(s);
         }
     }
 
@@ -133,13 +161,13 @@ public class GameLogic {
             case "Kamien" -> logicForRock();
             case "Papier" -> logicForPaper();
             case "Nozyczki" -> logicForScissors();
-            case "Spock" -> logicForSpok();
+            case "Spock" -> logicForSpock();
             case "Jaszczurka" -> logicForLizard();
         }
     }
 
-    private void runTheLogicResponsibleForCheckingWhoWonTheRoundIfResetIsNotTrue() {
-        if (!gameDataBase.getRecordOfAllUserRounds().isEmpty()) {
+    private void runTheLogicResponsibleForCheckingWhoWonTheRoundIfGameAllowToRunLogic() {
+        if (gameDataBase.isAllowToRunLogicOfRoundWin()) {
             takeUserMovementInThisRoundAndPassItFurther();
             GameGui.resultOfRound(gameDataBase);
             gameDataBase.setCurrentRound();
@@ -147,11 +175,11 @@ public class GameLogic {
     }
 
     public void resultOfRoundAndGoToNextRound() {
-        runTheLogicResponsibleForCheckingWhoWonTheRoundIfResetIsNotTrue();
+        runTheLogicResponsibleForCheckingWhoWonTheRoundIfGameAllowToRunLogic();
     }
 
     public void checkIfIsNotEndOfGame() {
-        int endGame = gameDataBase.getNumberOfSmalWinsToWinTheGame();
+        int endGame = gameDataBase.getNumberOfSmallWinsToWinTheGame();
         int userWin = gameDataBase.getCounterOfUserWins();
         int computerWin = gameDataBase.getCounterOfComputerWins();
         setEndTheGameIfThisIsTheEnd(endGame, userWin, computerWin);
@@ -184,7 +212,7 @@ public class GameLogic {
 
     public void checkWhatUserWhatToDoAfterEndOfGame() {
         if (!gameDataBase.isEndGame() && gameDataBase.isResetGame()) {
-            whatOptionUserChooseAndDecideWhatToDo();
+            whatOptionUserChooseAndDecideWhatToDoAndGivePermissionToRunLogic();
         }
     }
 }

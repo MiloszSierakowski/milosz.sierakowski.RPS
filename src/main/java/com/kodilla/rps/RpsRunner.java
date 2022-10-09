@@ -19,7 +19,7 @@ public class RpsRunner {
             do {
                 gameGui.getUserSelection();
                 gameGui.ifTheUserChooseNOrXAskHimToAcceptTheChoice();
-                gameLogic.whatOptionUserChooseAndDecideWhatToDo();
+                gameLogic.whatOptionUserChooseAndDecideWhatToDoAndGivePermissionToRunLogic();
                 gameLogic.resultOfRoundAndGoToNextRound();
                 gameLogic.checkIfIsNotEndOfGame();
                 gameGui.infoAboutNumberCurrentRound();
@@ -33,7 +33,7 @@ public class RpsRunner {
 
         } while (!endGame);
 
-        System.out.println("Dzieki za gre ");
+        System.out.println("DZIEKI ZA GRE ");
 
     }
 }

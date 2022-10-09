@@ -22,7 +22,7 @@ public class GameGui {
         System.out.println("Witam tym razem bardziej oficjalnie " + gameDataBase.getUser().getName() +
                 " w naszej grze. Mam ostatnia prosbe przed rozpoczeciem gry podaj do ilu zwyciestw chcesz grac ");
         int numberOfWinRoundsToWinTheGame = scannerCheck.takeNumberOfWinsAndGiveItToGameGui();
-        gameDataBase.setNumberOfSmalWinsToWinTheGame(numberOfWinRoundsToWinTheGame);
+        gameDataBase.setNumberOfSmallWinsToWinTheGame(numberOfWinRoundsToWinTheGame);
     }
 
     public void userOptionsExplanation() {
@@ -83,7 +83,7 @@ public class GameGui {
         System.out.println("Gra zostanie zresetowana ");
     }
 
-    public static void whenUserChooseNoToResetTheGameOrResetTheGame(GameDataBase gameDataBase) {
+    public static void whenUserChooseDoNotResetTheGameOrDoNotEndTheGame(GameDataBase gameDataBase) {
         if (!gameDataBase.isResetGame()) {
             System.out.println("Gra jest kontynuowana ");
         }
@@ -125,7 +125,7 @@ public class GameGui {
     public static void computerWinTheGame(GameDataBase gameDataBase) {
         System.out.println("Niestey " + gameDataBase.getUser().getName() + " przegrales z komputerem Twoje punkty to: " +
                 gameDataBase.getCounterOfUserWins() + " natomiast komputera " +
-                gameDataBase.getCounterOfComputerWins() + " Sprubuj ponownie.");
+                gameDataBase.getCounterOfComputerWins() + " sprobuj ponownie.");
     }
 
     public void askUserIfHeWontEndOrStartNewGame() {

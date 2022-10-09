@@ -2,19 +2,21 @@ package com.kodilla.rps.game.database;
 
 import com.kodilla.rps.User;
 import com.kodilla.rps.moves.GameFigures;
-
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class GameDataBase {
     private User user;
-    private int numberOfSmalWinsToWinTheGame;
+    private int numberOfSmallWinsToWinTheGame;
     private int counterOfComputerWins;
     private int counterOfUserWins;
     private int currentRound = 0;
     private boolean endGame = false;
     private boolean resetGame = false;
     private boolean afterChooseNAndGameIsEnd = false;
+
+    private boolean allowToRunLogicOfRoundWin = true;
     private String optionThatUserChoose;
     private String theUserChoosesIsYOrN;
     private List<GameFigures> recordOfAllUserRounds = new ArrayList<>();
@@ -24,8 +26,8 @@ public class GameDataBase {
         return user;
     }
 
-    public int getNumberOfSmalWinsToWinTheGame() {
-        return numberOfSmalWinsToWinTheGame;
+    public int getNumberOfSmallWinsToWinTheGame() {
+        return numberOfSmallWinsToWinTheGame;
     }
 
     public List<GameFigures> getRecordOfAllUserRounds() {
@@ -64,7 +66,15 @@ public class GameDataBase {
         return afterChooseNAndGameIsEnd;
     }
 
-    public void setAfterChooseNAndGameIsEnd(boolean afterChooseNAndGameIsEnd) {
+    public boolean isAllowToRunLogicOfRoundWin() {
+        return allowToRunLogicOfRoundWin;
+    }
+
+    public void setAllowToRunLogicOfRoundWin(boolean allowToRunLogicOfRoundWin) {
+        this.allowToRunLogicOfRoundWin = allowToRunLogicOfRoundWin;
+    }
+
+    public void setAfterChooseNoAndGameIsEnd(boolean afterChooseNAndGameIsEnd) {
         this.afterChooseNAndGameIsEnd = afterChooseNAndGameIsEnd;
     }
 
@@ -72,8 +82,16 @@ public class GameDataBase {
         this.counterOfComputerWins += 1;
     }
 
+    public void setCounterOfComputerWins(int counterOfComputerWins) {
+        this.counterOfComputerWins = counterOfComputerWins;
+    }
+
     public void setCounterOfUserWins() {
         this.counterOfUserWins += 1;
+    }
+
+    public void setCounterOfUserWins(int counterOfUserWins) {
+        this.counterOfUserWins = counterOfUserWins;
     }
 
     public void setResetGame(boolean resetGame) {
@@ -104,8 +122,8 @@ public class GameDataBase {
         this.user = user;
     }
 
-    public void setNumberOfSmalWinsToWinTheGame(int numberOfSmalWinsToWinTheGame) {
-        this.numberOfSmalWinsToWinTheGame = numberOfSmalWinsToWinTheGame;
+    public void setNumberOfSmallWinsToWinTheGame(int numberOfSmallWinsToWinTheGame) {
+        this.numberOfSmallWinsToWinTheGame = numberOfSmallWinsToWinTheGame;
     }
 
     public void addUserMoveInThisRound(GameFigures e) {
@@ -115,6 +133,4 @@ public class GameDataBase {
     public void addComputerMoveInThisRound(GameFigures e) {
         recordOfAllComputerRounds.add(e);
     }
-
-
 }

@@ -8,15 +8,23 @@ import java.util.Random;
 public class ComputerHardModeOrEasy {
     private final Random random = new Random();
     private int computerMove;
-    private final int valueHowBigChanceComputerHasToDraftInPercent = 25;
-    private final int valueHowBigChanceComputerHasToWinInPercent = 50;
+    private int valueHowBigChanceComputerHasToDrawInPercent = 25;
+    private int valueHowBigChanceComputerHasToWinInPercent = 50;
 
-    public int getValueHowBigChanceComputerHasToDraftInPercent() {
-        return valueHowBigChanceComputerHasToDraftInPercent;
+    public int getValueHowBigChanceComputerHasToDrawInPercent() {
+        return valueHowBigChanceComputerHasToDrawInPercent;
     }
 
     public int getValueHowBigChanceComputerHasToWinInPercent() {
         return valueHowBigChanceComputerHasToWinInPercent;
+    }
+
+    public void setValueHowBigChanceComputerHasToDrawInPercent(int valueHowBigChanceComputerHasToDrawInPercent) {
+        this.valueHowBigChanceComputerHasToDrawInPercent = valueHowBigChanceComputerHasToDrawInPercent;
+    }
+
+    public void setValueHowBigChanceComputerHasToWinInPercent(int valueHowBigChanceComputerHasToWinInPercent) {
+        this.valueHowBigChanceComputerHasToWinInPercent = valueHowBigChanceComputerHasToWinInPercent;
     }
 
     public int getComputerMove() {
@@ -27,7 +35,7 @@ public class ComputerHardModeOrEasy {
         this.computerMove = computerMove;
     }
 
-    private void giveRandomNumberFrom1To3() {
+    private void giveRandomNumberFrom1To5() {
         setComputerMove(random.nextInt(5) + 1);
     }
 
@@ -36,7 +44,7 @@ public class ComputerHardModeOrEasy {
     }
 
     private void computerEasyModeMakesMove(GameDataBase gameDataBase) {
-        giveRandomNumberFrom1To3();
+        giveRandomNumberFrom1To5();
         switch (getComputerMove()) {
             case 1 -> gameDataBase.addComputerMoveInThisRound(new Rock());
             case 2 -> gameDataBase.addComputerMoveInThisRound(new Paper());
@@ -46,23 +54,23 @@ public class ComputerHardModeOrEasy {
         }
     }
 
-    private boolean computerHardModeDidHeDraft() {
-        return getComputerMove() <= getValueHowBigChanceComputerHasToDraftInPercent();
+    private boolean computerHardModeDidHeDraw() {
+        return getComputerMove() <= getValueHowBigChanceComputerHasToDrawInPercent();
     }
 
     private boolean computerHardModeDidHeWin() {
-        return getComputerMove() > getValueHowBigChanceComputerHasToDraftInPercent() &&
-                getComputerMove() <= (getValueHowBigChanceComputerHasToDraftInPercent() + getValueHowBigChanceComputerHasToWinInPercent());
+        return getComputerMove() > getValueHowBigChanceComputerHasToDrawInPercent() &&
+                getComputerMove() <= (getValueHowBigChanceComputerHasToDrawInPercent() + getValueHowBigChanceComputerHasToWinInPercent());
     }
 
     private boolean computerHardModeDidHeLose() {
-        return getComputerMove() > (getValueHowBigChanceComputerHasToDraftInPercent() + getValueHowBigChanceComputerHasToWinInPercent());
+        return getComputerMove() > (getValueHowBigChanceComputerHasToDrawInPercent() + getValueHowBigChanceComputerHasToWinInPercent());
     }
 
     private String resultOfComputerMove() {
         giveRandomNumberFrom1To100();
-        if (computerHardModeDidHeDraft()) {
-            return "Draft";
+        if (computerHardModeDidHeDraw()) {
+            return "Draw";
         }
         if (computerHardModeDidHeWin()) {
             return "Win";
@@ -90,10 +98,11 @@ public class ComputerHardModeOrEasy {
     }
 
     private void computerHardModeMakesMoveVsRock(GameDataBase gameDataBase) {
-        switch (resultOfComputerMove()) {
+        String s = resultOfComputerMove();
+        switch (s) {
             case "Win" -> setWinMoveForComputerForRockLogic(gameDataBase);
             case "Lose" -> setLoseMoveForComputerForRockLogic(gameDataBase);
-            case "Draft" -> gameDataBase.addComputerMoveInThisRound(new Rock());
+            case "Draw" -> gameDataBase.addComputerMoveInThisRound(new Rock());
             case "Stop" -> System.out.println("Cos poszlo nie tak i wartosc " + computerMove + " jest spoza 1 do 100 ");
         }
     }
@@ -118,7 +127,7 @@ public class ComputerHardModeOrEasy {
         switch (resultOfComputerMove()) {
             case "Win" -> setWinMoveForComputerForPaperLogic(gameDataBase);
             case "Lose" -> setLoseMoveForComputerForPaperLogic(gameDataBase);
-            case "Draft" -> gameDataBase.addComputerMoveInThisRound(new Paper());
+            case "Draw" -> gameDataBase.addComputerMoveInThisRound(new Paper());
             case "Stop" -> System.out.println("Cos poszlo nie tak i wartosc " + computerMove + " jest spoza 1 do 100 ");
         }
     }
@@ -143,7 +152,7 @@ public class ComputerHardModeOrEasy {
         switch (resultOfComputerMove()) {
             case "Win" -> setWinMoveForComputerForScissorsLogic(gameDataBase);
             case "Lose" -> setLoseMoveForComputerForScissorsLogic(gameDataBase);
-            case "Draft" -> gameDataBase.addComputerMoveInThisRound(new Scissors());
+            case "Draw" -> gameDataBase.addComputerMoveInThisRound(new Scissors());
             case "Stop" -> System.out.println("Cos poszlo nie tak i wartosc " + computerMove + " jest spoza 1 do 100 ");
         }
     }
@@ -168,7 +177,7 @@ public class ComputerHardModeOrEasy {
         switch (resultOfComputerMove()) {
             case "Win" -> setWinMoveForComputerForSpockLogic(gameDataBase);
             case "Lose" -> setLoseMoveForComputerForSpockLogic(gameDataBase);
-            case "Draft" -> gameDataBase.addComputerMoveInThisRound(new Spock());
+            case "Draw" -> gameDataBase.addComputerMoveInThisRound(new Spock());
             case "Stop" -> System.out.println("Cos poszlo nie tak i wartosc " + computerMove + " jest spoza 1 do 100 ");
         }
     }
@@ -193,7 +202,7 @@ public class ComputerHardModeOrEasy {
         switch (resultOfComputerMove()) {
             case "Win" -> setWinMoveForComputerForLizardLogic(gameDataBase);
             case "Lose" -> setLoseMoveForComputerForLizardLogic(gameDataBase);
-            case "Draft" -> gameDataBase.addComputerMoveInThisRound(new Lizard());
+            case "Draw" -> gameDataBase.addComputerMoveInThisRound(new Lizard());
             case "Stop" -> System.out.println("Cos poszlo nie tak i wartosc " + computerMove + " jest spoza 1 do 100 ");
         }
     }
